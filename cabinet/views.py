@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def profile(request):
+    return render(request, 'cabinet/profile.html')
+
+
+def settings(request):
+    return render(request, 'cabinet/settings.html')
