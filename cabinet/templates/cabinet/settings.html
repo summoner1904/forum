@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Настройки профиля</title>
+    <link rel="stylesheet" href="{% static 'cabinet/assets/bootstrap/css/bootstrap.min.css' %}">
+</head>
+
+<body class="bg-dark">
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span class="fs-5 fw-bold">ITPONIC</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
+                </ul>
+                <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Профиль</button>
+            </div>
+            <div class="d-none d-md-block"><button class="btn btn-light me-2" type="button">Профиль</button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-light" style="margin-top: 30px;background: #1f1f1f;border-radius: 25px;">
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">Никнейм:&nbsp;</p><input class="d-inline-block" type="text" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Является вашим логином для входа</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">Статус:&nbsp;</p><input class="d-inline-block" type="text" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Отображается рядом с вашим ником</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">Адрес профиля:&nbsp;</p><input class="d-inline-block" type="text" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Постоянная ссылка на ваш профиль - https://itponic.com/members/19547</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">Telegram:&nbsp;</p><input class="d-inline-block" type="text" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">Discord:&nbsp;</p><input class="d-inline-block" type="text" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">День рождения:&nbsp;</p><input type="date" style="margin-left: 20px;color: rgb(255,255,255);background: rgb(92,92,92);border-style: none;height: 35px;border-radius: 5px;padding-left: 10px;">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-end d-inline-block float-start" style="width: 15%;">Пол:&nbsp;</p>
+                    <div class="d-inline-block float-start">
+                        <div class="d-table"><input class="d-inline-block" type="radio" style="margin-left: 20px;" name="gender" value="man">
+                            <p class="d-inline-block" style="margin-left: 5px;">Мужской</p>
+                        </div>
+                        <div class="d-table"><input class="d-inline-block" type="radio" style="margin-left: 20px;" name="gender" value="woman">
+                            <p class="d-inline-block" style="margin-left: 5px;">Женский</p>
+                        </div>
+                        <div class="d-table"><input class="d-inline-block" type="radio" style="margin-left: 20px;" name="gender" value="unknown" checked="">
+                            <p class="d-inline-block" style="margin-left: 5px;">Не указано</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'cabinet/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

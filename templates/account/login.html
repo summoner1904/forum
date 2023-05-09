@@ -12,16 +12,16 @@
 
 <body class="bg-dark">
     <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span class="fs-5 fw-bold">ITPONIC</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span class="fs-5 fw-bold">ITPONIC</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Маркет</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
                 </ul>
-                <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Зарегистрироваться</button><button class="btn btn-primary" type="button">Войти</button></div>
+                <div class="d-md-none my-2"><a href = '{% url 'account_signup' %}' class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href = '{% url 'account_login' %}' class="btn btn-primary" type="button">Войти</a></div>
             </div>
-            <div class="d-none d-md-block"><button class="btn btn-light me-2" type="button">Зарегистрироваться</button><a class="btn btn-primary" role="button" href="#">Войти</a></div>
+            <div class="d-none d-md-block"><a href = '{% url 'account_signup' %}' class="btn btn-light me-2" type="button">Зарегистрироваться</a><a class="btn btn-primary" role="button" href="{% url 'account_login' %}">Войти</a></div>
         </div>
     </nav>
     <section class="text-light py-4 py-xl-5">
@@ -41,7 +41,8 @@
                                 </svg></div>
                             <form class="login" method="POST" action="{% url 'account_login' %}">
                                 {% csrf_token %}
-                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Логин"></div>
+                                {{ form.errors }}
+                                <div class="mb-3"><input class="form-control" type="username" name="login" placeholder="Логин"></div>
                                 <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Пароль"></div>
                                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Войти</button></div>
                                 <p class="text-muted">Забыли пароль?</p>
