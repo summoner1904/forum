@@ -18,10 +18,15 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
                 </ul>
-                <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Профиль</button>
-            </div>
-            <div class="d-none d-md-block"><button class="btn btn-light me-2" type="button">Профиль</button>
-        </div>
+                {% if user.is_authenticated %}
+                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                    </div>
+                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+                {% else %}
+                    <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}" class="btn btn-primary" type="button">Войти</a></div>
+                    </div>
+                    <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a class="btn btn-primary" role="button" href="{% url 'account_login' %}">Войти</a></div>
+                {% endif %}
     </nav>
     <div class="container">
         <div class="row">
@@ -36,6 +41,12 @@
                     <p class="text-end d-inline-block" style="width: 15%;">Статус:&nbsp;</p><input class="d-inline-block" type="text" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается рядом с вашим ником</p>
+                    </div>
+                </div>
+                 <div style="margin-bottom: 30px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">Аватар:&nbsp;</p><input class="d-inline-block" type="file" style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);">
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Главное изображение вашего профиля</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 30px;">
