@@ -135,7 +135,14 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Allauth - общие настройки
 LOGIN_REDIRECT_URL = '../../cabinet/profile'
 ACCOUNT_LOGOUT_ON_GET = True
+
+# Allauth - регистрация
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
 
 SITE_ID = 1
