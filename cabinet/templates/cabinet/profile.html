@@ -20,9 +20,9 @@
                     <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
                 </ul>
                 {% if user.is_authenticated %}
-                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
                     </div>
-                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
                 {% else %}
                     <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}" class="btn btn-primary" type="button">Войти</a></div>
                     </div>
@@ -32,22 +32,22 @@
     <div class="container" style="margin-top: 75px;">
         <div class="row">
             <div class="col-md-6 col-xxl-3 offset-xxl-0" style="background: #1f1f1f;border-radius: 25px;padding-top: 15px;margin-bottom: 20px;">
-                <div><img src="{% static 'cabinet/assets/img/full.jpg' %}" style="width: 100%;padding: 15px;"></div><a href="{% url 'cabinet:settings' %}"><button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center" type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">Редактировать</button></a>
+                <div><img src="{% block image_profile %}{% endblock %}" style="width: 100%;padding: 15px;"></div><a href="{% url 'cabinet:settings' %}"><button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center" type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">Редактировать</button></a>
             </div>
             <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light" style="padding: 20px;background: #1f1f1f;border-radius: 25px;">
                 <div>
                     <div style="padding-left: 15px;">
-                        <h5 class="d-inline-block">serjasum</h5>
-                        <p class="text-muted d-inline-block float-end">15 минут назад</p>
-                        <p class="text-muted">Здесь мог бы быть ваш статус...</p>
+                        <h5 class="d-inline-block">{% block username %}{% endblock %}</h5>
+                        <p class="text-muted d-inline-block float-end">{% block last-online %}{% endblock %}</p>
+                        <p class="text-muted">{% block status %}{% endblock %}</p>
                     </div>
                 </div>
                 <hr>
-                <p><span class="text-muted">Дата регистрации:&nbsp;</span>14 мар 2022 год</p>
-                <p><span class="text-muted">Пол:&nbsp;</span>Мужской</p>
-                <p><span class="text-muted">Discord:&nbsp;</span>serjasum#6566</p>
-                <p><span class="text-muted">Telegram:&nbsp;</span>@serjasum</p>
-                <p><span class="text-muted">Дата рождения:&nbsp;</span>14 мая</p>
+                <p><span class="text-muted">Дата регистрации:&nbsp;</span>{% block date_joined %}{% endblock %}</p>
+                <p><span class="text-muted">Пол:&nbsp;</span>{% block gender %}{% endblock %}</p>
+                <p><span class="text-muted">Discord:&nbsp;</span>{% block discord %}{% endblock %}</p>
+                <p><span class="text-muted">Telegram:&nbsp;</span>{% block telegram %}{% endblock %}</p>
+                <p><span class="text-muted">Дата рождения:&nbsp;</span>{% block date_birthday %}{% endblock %}</p>
             </div>
         </div>
     </div>
@@ -79,19 +79,19 @@
             <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light" style="height: 100%;background: #1f1f1f;border-radius: 25px;">
                 <div class="text-center" style="height: 100%;padding-top: 20px;">
                     <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">14</p>
+                        <p style="margin-bottom: 5px;">{% block reputation %}{% endblock %}</p>
                         <p class="text-muted">Репутация</p>
                     </div>
                     <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">75</p>
+                        <p style="margin-bottom: 5px;">{% block messages %}{% endblock %}</p>
                         <p class="text-muted">Сообщений</p>
                     </div>
                     <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">5</p>
+                        <p style="margin-bottom: 5px;">{% block subscribes %}{% endblock %}</p>
                         <p class="text-muted">Подписчиков</p>
                     </div>
                     <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">19</p>
+                        <p style="margin-bottom: 5px;">{% block products %}{% endblock %}</p>
                         <p class="text-muted">Товаров</p>
                     </div>
                     <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">

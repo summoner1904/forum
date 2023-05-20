@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     'django.contrib.sites',
     "django.contrib.staticfiles",
+    'django.contrib.humanize',
     # Библиотека allauth
     'allauth',
     'allauth.account',
@@ -136,7 +137,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Allauth - общие настройки
-LOGIN_REDIRECT_URL = '../../cabinet/profile'
+LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
 
 # Allauth - регистрация
@@ -145,5 +146,9 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 AUTH_USER_MODEL = 'cabinet.UserProfile'
+
+# Медиа
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 SITE_ID = 1

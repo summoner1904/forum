@@ -24,7 +24,7 @@
             </div>
             {% if user.is_authenticated %}
                 <div class="d-none d-md-block">
-                    <a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a>
+                    <a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a>
                     <a href="{% url 'account_logout' %}" class="btn btn-danger me-2" type="button">Выйти</a>
                 </div>
             {% else %}
