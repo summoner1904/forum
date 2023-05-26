@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Настройки профиля</title>
     <link rel="stylesheet" href="{% static 'cabinet/assets/bootstrap/css/bootstrap.min.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
 
 <body class="bg-dark">
@@ -49,88 +52,68 @@
         <div class="col-md-12 text-light" style="margin-top: 30px;background: #1f1f1f;border-radius: 25px;">
             <form action="{% url 'cabinet:settings' %}" method="post">
                 {% csrf_token %}
+
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">Никнейм:&nbsp;</p><input name="username"
-                                                                                                    class="d-inline-block"
-                                                                                                    type="text"
-                                                                                                    style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.username.label }}&nbsp;</p>{{form.username}}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Является вашим логином для входа</p>
                     </div>
                 </div>
-                <div style="margin-bottom: 30px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">Статус:&nbsp;</p><input
-                        class="d-inline-block" type="text"
-                        style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.status.label }}&nbsp;</p>{{form.status}}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается рядом с вашим ником</p>
                     </div>
                 </div>
-                <div style="margin-bottom: 30px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">Аватар:&nbsp;</p><input
-                        class="d-inline-block" type="file"
-                        style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);">
-                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
-                        <p class="text-start text-muted" style="margin-left: 16px;">Главное изображение вашего
-                            профиля</p>
-                    </div>
-                </div>
-                <div style="margin-bottom: 30px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">Адрес профиля:&nbsp;</p><input
-                        class="d-inline-block" type="text"
-                        style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
-                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
-                        <p class="text-start text-muted" style="margin-left: 16px;">Постоянная ссылка на ваш профиль -
-                            https://itponic.com/members/19547</p>
-                    </div>
-                </div>
-                <div style="margin-bottom: 30px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">Telegram:&nbsp;</p><input
-                        class="d-inline-block" type="text"
-                        style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.telegram.label }}&nbsp;</p>{{form.telegram}}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
-                <div style="margin-bottom: 30px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">Discord:&nbsp;</p><input
-                        class="d-inline-block" type="text"
-                        style="width: 60%;margin-left: 20px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;">
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.discord.label }}&nbsp;</p>{{form.discord}}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
-                <div style="margin-bottom: 30px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">День рождения:&nbsp;</p><input type="date"
-                                                                                                          style="margin-left: 20px;color: rgb(255,255,255);background: rgb(92,92,92);border-style: none;height: 35px;border-radius: 5px;padding-left: 10px;">
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <p class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.avatar.label }}&nbsp;</p>{{form.avatar}}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
-                <div>
-                    <p class="text-end d-inline-block float-start" style="width: 15%;">Пол:&nbsp;</p>
-                    <div class="d-inline-block float-start">
-                        <div class="d-table"><input class="d-inline-block" type="radio" style="margin-left: 20px;"
-                                                    name="gender" value="man">
-                            <p class="d-inline-block" style="margin-left: 5px;">Мужской</p>
-                        </div>
-                        <div class="d-table"><input class="d-inline-block" type="radio" style="margin-left: 20px;"
-                                                    name="gender" value="woman">
-                            <p class="d-inline-block" style="margin-left: 5px;">Женский</p>
-                        </div>
-                        <div class="d-table"><input class="d-inline-block" type="radio" style="margin-left: 20px;"
-                                                    name="gender" value="unknown" checked="">
-                            <p class="d-inline-block" style="margin-left: 5px;">Не указано</p>
-                        </div>
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <style>
+                        #cls_gender, .gender_classs{
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                    </style>
+                    <p id="cls_gender" class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.gender.label }}&nbsp;</p>
+                    <div class="gender_classs" class="gender_cls">
+                        {{ form.gender }}
+                    </div>
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
-                <div>
-                    <button type="submit" class="btn-success">Сохранить</button>
+
+                <div style="margin-bottom: 30px;margin-top: 40px;">
+                    <p class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.date_birthday.label }}&nbsp;</p>{{form.date_birthday}}
+                    <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                        <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
+                    </div>
                 </div>
+
+                <button type="submit" style="margin-left: 15%;margin-bottom: 30px;width: 50%;height: 50px;border-radius: 10px; border: none; background-color: #34bb80;">Сохранить изменения</button>
             </form>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <script src="{% static 'cabinet/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 

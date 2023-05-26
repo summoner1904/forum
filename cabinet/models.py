@@ -3,10 +3,10 @@ from django.contrib.auth.models import AbstractUser, User
 
 
 class UserProfile(AbstractUser):
-    status = models.CharField(max_length=128)
+    status = models.CharField(max_length=128, blank=True)
     date_birthday = models.DateField(blank=True, null=True, default='1970-01-01', verbose_name='День рождения')
-    telegram = models.CharField(max_length=64, default='Неизвестно', null=True, verbose_name='Telegram')
-    discord = models.CharField(max_length=64, default='Неизвестно', null=True, verbose_name='Discord')
+    telegram = models.CharField(max_length=64, default='Неизвестно', null=True, verbose_name='Telegram', blank=True)
+    discord = models.CharField(max_length=64, default='Неизвестно', null=True, verbose_name='Discord', blank=True)
     gender = models.CharField(max_length=16, default='Не указан', null=True, verbose_name='Пол')
     reputation = models.IntegerField(verbose_name='Репутация', default=0)
     messages = models.IntegerField(verbose_name='Сообщения', default=0)
