@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
+from PIL import Image
 
 
 class UserProfile(AbstractUser):
@@ -12,7 +13,7 @@ class UserProfile(AbstractUser):
     messages = models.IntegerField(verbose_name='Сообщения', default=0)
     subscribes = models.IntegerField(verbose_name='Подписчики', default=0)
     product = models.IntegerField(verbose_name='Товаров', default=0)
-    avatar = models.ImageField(upload_to='images_profile/%Y-%m-%d/', default='https://cdn1.flamp.ru/caf098e477ae55905890b7fb0b3700c1.jpg')
+    avatar = models.ImageField(upload_to='images_profile/%Y-%m-%d', default='https://cdn1.flamp.ru/caf098e477ae55905890b7fb0b3700c1.jpg')
 
     class Meta:
         verbose_name = 'Пользователь'
