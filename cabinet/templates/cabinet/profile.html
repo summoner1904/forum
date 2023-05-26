@@ -20,9 +20,9 @@
                     <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
                 </ul>
                 {% if user.is_authenticated %}
-                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' request.user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
                     </div>
-                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' request.user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
                 {% else %}
                     <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}" class="btn btn-primary" type="button">Войти</a></div>
                     </div>
@@ -32,7 +32,7 @@
     <div class="container" style="margin-top: 75px;">
         <div class="row">
             <div class="col-md-6 col-xxl-3 offset-xxl-0" style="background: #1f1f1f;border-radius: 25px;padding-top: 15px;margin-bottom: 20px;">
-                <div><img src="{% block image_profile %}{% endblock %}" style="width: 100%;padding: 15px;"></div><a href="{% url 'cabinet:settings' %}"><button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center" type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">Редактировать</button></a>
+                <div><img src="{% block image_profile %}{% endblock %}" style="width: 300px;padding: 15px;height: 300px;"></div><a href="{% url 'cabinet:settings' %}"><button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center" type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">Редактировать</button></a>
             </div>
             <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light" style="padding: 20px;background: #1f1f1f;border-radius: 25px;">
                 <div>
@@ -47,6 +47,7 @@
                 <p><span class="text-muted">Пол:&nbsp;</span>{% block gender %}{% endblock %}</p>
                 <p><span class="text-muted">Discord:&nbsp;</span>{% block discord %}{% endblock %}</p>
                 <p><span class="text-muted">Telegram:&nbsp;</span>{% block telegram %}{% endblock %}</p>
+                <p><span class="text-muted">Steam:&nbsp;</span>{% block steam %}{% endblock %}</p>
                 <p><span class="text-muted">Дата рождения:&nbsp;</span>{% block date_birthday %}{% endblock %}</p>
             </div>
         </div>
