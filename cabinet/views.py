@@ -19,5 +19,4 @@ def settings_profile(request):
                 if field_value:
                     setattr(request.user, field_name, field_value)
             UserProfile.save(request.user)
-
     return render(request, 'cabinet/settings.html', {'form': form})
