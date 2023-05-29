@@ -1,5 +1,7 @@
+from django.contrib.auth import password_validation
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
+import datetime
 
 
 class UserProfile(AbstractUser):
@@ -13,6 +15,13 @@ class UserProfile(AbstractUser):
     subscribes = models.IntegerField(verbose_name='Подписчики', default=0)
     product = models.IntegerField(verbose_name='Товаров', default=0)
     avatar = models.ImageField(upload_to='images_profile/%Y-%m-%d', default='images_profile/2023-05-27/caf098e477ae55905890b7fb0b3700c1.jpg')
+
+    def save(self, *args, **kwargs):
+        self.last_login = datetime.datetime.now()
+        super().save(*args, **kwargs)
+        if self._password is not None:
+            password_validation.password_changed(self._password, self)
+            self._password = None
 
     class Meta:
         verbose_name = 'Пользователь'
