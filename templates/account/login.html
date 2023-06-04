@@ -46,6 +46,9 @@
                                 </svg></div>
                             <form class="login" method="POST" action="{% url 'account_login' %}">
                                 {% csrf_token %}
+                                {% if form.errors %}
+                                    <div style="margin-bottom: 30px;color:#d00a0a" class="form-errors">Проверьте введенные данные!</div>
+                                {% endif %}
                                 <div class="mb-3"><input class="form-control" type="username" name="login" placeholder="Логин"></div>
                                 <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Пароль"></div>
                                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Войти</button></div>
