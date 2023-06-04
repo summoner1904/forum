@@ -9,10 +9,6 @@
     {{ user.status }}
 {% endblock %}
 
-{% block date_joined %}
-    {{ user.date_joined }}
-{% endblock %}
-
 {% block telegram %}
     {{ user.telegram }}
 {% endblock %}
@@ -59,4 +55,12 @@
 
 {% block steam %}
     {{ user.telegram }}
+{% endblock %}
+
+{% block registration %}
+    {{ user.date_joined | naturalday}}
+{% endblock %}
+
+{% block date_joined %}
+    {{ user.date_joined | naturaltime }}
 {% endblock %}

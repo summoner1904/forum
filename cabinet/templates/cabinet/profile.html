@@ -11,192 +11,331 @@
 </head>
 
 <body class="bg-dark" style="color: rgb(255,255,255);">
-    <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span class="fs-5 fw-bold">ITPONIC</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
-                </ul>
-                {% if user.is_authenticated %}
-                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' request.user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
-                    </div>
-                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' request.user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+<nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span
+            class="fs-5 fw-bold">ITPONIC</span></a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
+            </ul>
+            {% if user.is_authenticated %}
+                <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' request.user.pk %}"
+                                               class="btn btn-light me-2" type="button">Профиль</a><a
+                        href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                </div>
+                <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' request.user.pk %}"
+                                                  class="btn btn-light me-2" type="button">Профиль</a><a
+                        href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+            {% else %}
+                <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
+                                               type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}"
+                                                                                      class="btn btn-primary"
+                                                                                      type="button">Войти</a></div>
+                </div>
+                <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
+                                                  type="button">Зарегистрироваться</a><a class="btn btn-primary"
+                                                                                         role="button"
+                                                                                         href="{% url 'account_login' %}">Войти</a>
+                </div>
+            {% endif %}
+</nav>
+<div class="container" style="margin-top: 75px;">
+    <div class="row">
+        <div class="col-md-6 col-xxl-3 offset-xxl-0"
+             style="background: #1f1f1f;border-radius: 25px;padding-top: 15px;margin-bottom: 20px;">
+            <div>
+                <img src="{% block image_profile %}{% endblock %}" style="width: 300px;padding: 15px;height: 300px;">
+            </div>
+            <a href="{% url 'cabinet:settings' %}">
+                {% if request.user == user %}
+                <button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
+                        type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
+                    Редактировать
+                </button>
                 {% else %}
-                    <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}" class="btn btn-primary" type="button">Войти</a></div>
-                    </div>
-                    <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a class="btn btn-primary" role="button" href="{% url 'account_login' %}">Войти</a></div>
+                <button class="btn btn-danger text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
+                        type="button"
+                        style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;display:none;">
+                    Подписаться
+                </button>
                 {% endif %}
-    </nav>
-    <div class="container" style="margin-top: 75px;">
-        <div class="row">
-            <div class="col-md-6 col-xxl-3 offset-xxl-0" style="background: #1f1f1f;border-radius: 25px;padding-top: 15px;margin-bottom: 20px;">
-                <div><img src="{% block image_profile %}{% endblock %}" style="width: 300px;padding: 15px;height: 300px;"></div><a href="{% url 'cabinet:settings' %}"><button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center" type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">Редактировать</button></a>
-            </div>
-            <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light" style="padding: 20px;background: #1f1f1f;border-radius: 25px;">
-                <div>
-                    <div style="padding-left: 15px;">
-                        <h5 class="d-inline-block">{% block username %}{% endblock %}</h5>
-                        <p class="text-muted d-inline-block float-end">{% block last-online %}{% endblock %}</p>
-                        <p class="text-muted">{% block status %}{% endblock %}</p>
-                    </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light"
+             style="padding: 20px;background: #1f1f1f;border-radius: 25px;">
+            <div>
+                <div style="padding-left: 15px;">
+                    <h5 class="d-inline-block">{% block username %}{% endblock %}</h5>
+                    <p class="text-muted d-inline-block float-end">{% block last-online %}{% endblock %}</p>
+                    <p class="text-muted">{% block status %}{% endblock %}</p>
                 </div>
-                <hr>
-                <p><span class="text-muted">Дата регистрации:&nbsp;</span>{% block date_joined %}{% endblock %}</p>
-                <p><span class="text-muted">Пол:&nbsp;</span>{% block gender %}{% endblock %}</p>
-                <p><span class="text-muted">Discord:&nbsp;</span>{% block discord %}{% endblock %}</p>
-                <p><span class="text-muted">Telegram:&nbsp;</span>{% block telegram %}{% endblock %}</p>
-                <p><span class="text-muted">Steam:&nbsp;</span>{% block steam %}{% endblock %}</p>
-                <p><span class="text-muted">Дата рождения:&nbsp;</span>{% block date_birthday %}{% endblock %}</p>
+            </div>
+            <hr>
+            <p><span class="text-muted">Дата регистрации:&nbsp;</span>{% block date_joined %}{% endblock %}</p>
+            <p><span class="text-muted">Пол:&nbsp;</span>{% block gender %}{% endblock %}</p>
+            <p><span class="text-muted">Discord:&nbsp;</span>{% block discord %}{% endblock %}</p>
+            <p><span class="text-muted">Telegram:&nbsp;</span>{% block telegram %}{% endblock %}</p>
+            <p><span class="text-muted">Steam:&nbsp;</span>{% block steam %}{% endblock %}</p>
+            <p><span class="text-muted">Дата рождения:&nbsp;</span>{% block date_birthday %}{% endblock %}</p>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 25px;">
+    <div class="row">
+        <div class="col-md-6 col-xxl-3 text-light"
+             style="padding: 20px;background: #1f1f1f;border-radius: 25px;margin-bottom: 20px;height: 100%;">
+            <div>
+                <h5 class="text-muted">Подписки</h5>
+            </div>
+            <div style="margin-top: 25px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
+                                                                        style="border-radius: 30px;" width="40">
+                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
+            </div>
+            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
+                                                                        style="border-radius: 30px;" width="40">
+                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
+            </div>
+            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
+                                                                        style="border-radius: 30px;" width="40">
+                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
+            </div>
+            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
+                                                                        style="border-radius: 30px;" width="40">
+                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
+            </div>
+            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
+                                                                        style="border-radius: 30px;" width="40">
+                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
+            </div>
+            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
+                                                                        style="border-radius: 30px;" width="40">
+                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light"
+             style="height: 100%;background: #1f1f1f;border-radius: 25px;">
+            <div class="text-center" style="height: 100%;padding-top: 20px;">
+                <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
+                    <p style="margin-bottom: 5px;">{% block reputation %}{% endblock %}</p>
+                    <p class="text-muted">Репутация</p>
+                </div>
+                <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
+                    <p style="margin-bottom: 5px;">{% block messages %}{% endblock %}</p>
+                    <p class="text-muted">Сообщений</p>
+                </div>
+                <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
+                    <p style="margin-bottom: 5px;">{% block subscribes %}{% endblock %}</p>
+                    <p class="text-muted">Подписчиков</p>
+                </div>
+                <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
+                    <p style="margin-bottom: 5px;">{% block products %}{% endblock %}</p>
+                    <p class="text-muted">Товаров</p>
+                </div>
+                <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
+                    <p style="margin-bottom: 5px;">{% block registration %}{% endblock %}</p>
+                    <p class="text-muted">На сайте</p>
+                </div>
+            </div>
+            <hr>
+            <div style="padding: 30px;margin-bottom: 9px;width: 100%;"><img class="d-inline-block" src="
+                    {% block image_profile1 %}{% endblock %}" style="border-radius: 30px;" width="55" height="55"><input
+                    class="d-inline-block" type="text"
+                    style="width: 75%;padding-left: 10px;border-style: none;background: rgb(59,59,59);color: rgb(255,255,255);margin-left: 10px;height: 40px;"
+                    placeholder="Напишите что-нибудь...">
+                <button class="btn btn-success btn-sm d-block float-none" type="button"
+                        style="height: 40px;margin-top: 10px;margin-left: 65px;">Опубликовать
+                </button>
+            </div>
+            <hr>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
+                                                       width="50" style="border-radius: 30px;">
+                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
+                    <p class="text-muted d-inline-block float-end">14.04.22</p>
+                    <p class="text-start">Django - это фреймворк для веб-разработки, написанный на Python в 2005 году.
+                        Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до
+                        аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и
+                        простотой освоения.</p>
+                </div>
+                <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                    </svg>
+                    Мне нравится!
+                </p>
+                <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                         style="margin-right: 10px;">
+                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                              fill="currentColor"></path>
+                    </svg>
+                    Прокомментировать
+                </p>
+            </div>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
+                                                       width="50" style="border-radius: 30px;">
+                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
+                    <p class="text-muted d-inline-block float-end">14.04.22</p>
+                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
+                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
+                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
+                </div>
+                <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                    </svg>
+                    Мне нравится!
+                </p>
+                <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                         style="margin-right: 10px;">
+                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                              fill="currentColor"></path>
+                    </svg>
+                    Прокомментировать
+                </p>
+            </div>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
+                                                       width="50" style="border-radius: 30px;">
+                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
+                    <p class="text-muted d-inline-block float-end">14.04.22</p>
+                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
+                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
+                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
+                </div>
+                <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                    </svg>
+                    Мне нравится!
+                </p>
+                <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                         style="margin-right: 10px;">
+                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                              fill="currentColor"></path>
+                    </svg>
+                    Прокомментировать
+                </p>
+            </div>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
+                                                       width="50" style="border-radius: 30px;">
+                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
+                    <p class="text-muted d-inline-block float-end">14.04.22</p>
+                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
+                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
+                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
+                </div>
+                <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                    </svg>
+                    Мне нравится!
+                </p>
+                <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                         style="margin-right: 10px;">
+                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                              fill="currentColor"></path>
+                    </svg>
+                    Прокомментировать
+                </p>
+            </div>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
+                                                       width="50" style="border-radius: 30px;">
+                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
+                    <p class="text-muted d-inline-block float-end">14.04.22</p>
+                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
+                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
+                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
+                </div>
+                <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                    </svg>
+                    Мне нравится!
+                </p>
+                <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                         style="margin-right: 10px;">
+                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                              fill="currentColor"></path>
+                    </svg>
+                    Прокомментировать
+                </p>
+            </div>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
+                                                       width="50" style="border-radius: 30px;">
+                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
+                    <p class="text-muted d-inline-block float-end">14.04.22</p>
+                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
+                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
+                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
+                </div>
+                <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                    </svg>
+                    Мне нравится!
+                </p>
+                <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                         style="margin-right: 10px;">
+                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                              fill="currentColor"></path>
+                    </svg>
+                    Прокомментировать
+                </p>
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top: 25px;">
-        <div class="row">
-            <div class="col-md-6 col-xxl-3 text-light" style="padding: 20px;background: #1f1f1f;border-radius: 25px;margin-bottom: 20px;height: 100%;">
-                <div>
-                    <h5 class="text-muted">Подписки</h5>
-                </div>
-                <div style="margin-top: 25px;color: rgb(181,181,181);"><img class="d-inline-block" src="{% static 'cabinet/assets/img/4426658.jpg' %}" style="border-radius: 30px;" width="40">
-                    <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-                </div>
-                <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block" src="{% static 'cabinet/assets/img/4426658.jpg' %}" style="border-radius: 30px;" width="40">
-                    <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-                </div>
-                <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block" src="{% static 'cabinet/assets/img/4426658.jpg' %}" style="border-radius: 30px;" width="40">
-                    <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-                </div>
-                <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block" src="{% static 'cabinet/assets/img/4426658.jpg' %}" style="border-radius: 30px;" width="40">
-                    <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-                </div>
-                <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block" src="{% static 'cabinet/assets/img/4426658.jpg' %}" style="border-radius: 30px;" width="40">
-                    <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-                </div>
-                <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block" src="{% static 'cabinet/assets/img/4426658.jpg' %}" style="border-radius: 30px;" width="40">
-                    <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light" style="height: 100%;background: #1f1f1f;border-radius: 25px;">
-                <div class="text-center" style="height: 100%;padding-top: 20px;">
-                    <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">{% block reputation %}{% endblock %}</p>
-                        <p class="text-muted">Репутация</p>
-                    </div>
-                    <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">{% block messages %}{% endblock %}</p>
-                        <p class="text-muted">Сообщений</p>
-                    </div>
-                    <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">{% block subscribes %}{% endblock %}</p>
-                        <p class="text-muted">Подписчиков</p>
-                    </div>
-                    <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">{% block products %}{% endblock %}</p>
-                        <p class="text-muted">Товаров</p>
-                    </div>
-                    <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                        <p style="margin-bottom: 5px;">4 г. 3 м.</p>
-                        <p class="text-muted">На сайте</p>
-                    </div>
-                </div>
-                <hr>
-                <div style="padding: 30px;margin-bottom: 9px;width: 100%;"><img class="d-inline-block" src="{% block image_profile1 %}{% endblock %}" style="border-radius: 30px;" width="55" height="55"><input class="d-inline-block" type="text" style="width: 75%;padding-left: 10px;border-style: none;background: rgb(59,59,59);color: rgb(255,255,255);margin-left: 10px;height: 40px;" placeholder="Напишите что-нибудь..."><button class="btn btn-success btn-sm d-block float-none" type="button" style="height: 40px;margin-top: 10px;margin-left: 65px;">Опубликовать</button></div>
-                <hr>
-                <div style="padding: 30px;">
-                    <div style="margin-bottom: 20px;"><img class="d-inline-block" src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}" width="50" style="border-radius: 30px;">
-                        <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                        <p class="text-muted d-inline-block float-end">14.04.22</p>
-                        <p class="text-start">Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                    </div>
-                    <p class="text-muted d-inline-block" style="margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                        </svg>Мне нравится!</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 10px;">
-                            <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                            <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z" fill="currentColor"></path>
-                        </svg>Прокомментировать</p>
-                </div>
-                <div style="padding: 30px;">
-                    <div style="margin-bottom: 20px;"><img class="d-inline-block" src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}" width="50" style="border-radius: 30px;">
-                        <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                        <p class="text-muted d-inline-block float-end">14.04.22</p>
-                        <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                    </div>
-                    <p class="text-muted d-inline-block" style="margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                        </svg>Мне нравится!</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 10px;">
-                            <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                            <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z" fill="currentColor"></path>
-                        </svg>Прокомментировать</p>
-                </div>
-                <div style="padding: 30px;">
-                    <div style="margin-bottom: 20px;"><img class="d-inline-block" src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}" width="50" style="border-radius: 30px;">
-                        <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                        <p class="text-muted d-inline-block float-end">14.04.22</p>
-                        <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                    </div>
-                    <p class="text-muted d-inline-block" style="margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                        </svg>Мне нравится!</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 10px;">
-                            <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                            <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z" fill="currentColor"></path>
-                        </svg>Прокомментировать</p>
-                </div>
-                <div style="padding: 30px;">
-                    <div style="margin-bottom: 20px;"><img class="d-inline-block" src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}" width="50" style="border-radius: 30px;">
-                        <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                        <p class="text-muted d-inline-block float-end">14.04.22</p>
-                        <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                    </div>
-                    <p class="text-muted d-inline-block" style="margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                        </svg>Мне нравится!</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 10px;">
-                            <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                            <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z" fill="currentColor"></path>
-                        </svg>Прокомментировать</p>
-                </div>
-                <div style="padding: 30px;">
-                    <div style="margin-bottom: 20px;"><img class="d-inline-block" src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}" width="50" style="border-radius: 30px;">
-                        <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                        <p class="text-muted d-inline-block float-end">14.04.22</p>
-                        <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                    </div>
-                    <p class="text-muted d-inline-block" style="margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                        </svg>Мне нравится!</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 10px;">
-                            <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                            <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z" fill="currentColor"></path>
-                        </svg>Прокомментировать</p>
-                </div>
-                <div style="padding: 30px;">
-                    <div style="margin-bottom: 20px;"><img class="d-inline-block" src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}" width="50" style="border-radius: 30px;">
-                        <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                        <p class="text-muted d-inline-block float-end">14.04.22</p>
-                        <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                    </div>
-                    <p class="text-muted d-inline-block" style="margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                        </svg>Мне нравится!</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 10px;">
-                            <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                            <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z" fill="currentColor"></path>
-                        </svg>Прокомментировать</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="{% static 'cabinet/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</div>
+<script src="{% static 'cabinet/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 
 </html>
