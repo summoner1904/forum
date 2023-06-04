@@ -144,7 +144,6 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-
 AUTH_USER_MODEL = 'cabinet.UserProfile'
 
 # Медиа
