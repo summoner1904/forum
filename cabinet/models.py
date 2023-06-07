@@ -1,4 +1,4 @@
-from django.contrib.auth import password_validation
+from django.contrib.auth import password_validation, get_user_model
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 import datetime
@@ -26,3 +26,15 @@ class UserProfile(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+
+UserProfile = get_user_model()
+
+class Subscription(models.Model):
+    subscriber = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='subscriptions_made',
+                                   verbose_name='Подписчик')
+    subscribed_to = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='subscriptions_received',
+                                      verbose_name='Подписан на')
+
+    def __str__(self):
+        return f'{self.subscriber} подписан на {self.subscribed_to}'

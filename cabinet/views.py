@@ -1,12 +1,22 @@
 from django.shortcuts import render, get_object_or_404
-from .models import UserProfile
+from .models import UserProfile, Subscription
 from django.contrib.auth.decorators import login_required
 from .forms import SettingsProfileForm
+from django.http import JsonResponse
 
 
 def profile(request, pk):
     user = get_object_or_404(UserProfile, pk=pk)
-    return render(request, 'cabinet/userprofile.html', {'user': user})
+    subscribed = False
+    if Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
+        subscribed = True
+    if request.method == 'POST':
+        # Проверка на то - есть ли подписка этого пользователя на этого юзера.
+        if not Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
+            Subscription.objects.create(subscriber=request.user, subscribed_to=user)
+        else:
+            subscribed = True
+    return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed})
 
 
 @login_required

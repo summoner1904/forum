@@ -50,20 +50,39 @@
             <div>
                 <img src="{% block image_profile %}{% endblock %}" style="width: 300px;padding: 15px;height: 300px;">
             </div>
-            <a href="{% url 'cabinet:settings' %}">
-                {% if request.user == user %}
-                <button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
-                        type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
-                    Редактировать
-                </button>
-                {% else %}
-                <button class="btn btn-danger text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
-                        type="button"
-                        style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;display:none;">
-                    Подписаться
-                </button>
-                {% endif %}
-            </a>
+            {% if request.user == user %}
+                <a href="{% url 'cabinet:settings' %}">
+                    <button class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
+                            type="button" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
+                        Редактировать
+                    </button>
+                </a>
+            {% else %}
+                <form action="{% url 'cabinet:profile' pk=user.pk %}" method="post">
+                    {% csrf_token %}
+                    {% if not subscribed %}
+                        <button name='subscribed'
+                                class="btn btn-danger text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
+                                type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
+                            Подписаться
+                        </button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'cabinet:profile' pk=user.pk %}" method="post">
+                    {% csrf_token %}
+                    {% if subscribed %}
+                        <button name='subscribed'
+                                class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
+                                type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
+                            Вы подписаны
+                        </button>
+                        <button class="btn btn-danger text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
+                                type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
+                            Отписаться
+                        </button>
+                    {% endif %}
+                </form>
+            {% endif %}
         </div>
         <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light"
              style="padding: 20px;background: #1f1f1f;border-radius: 25px;">
