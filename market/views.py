@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import MarketFilterForm
 
 
 def index(request):
@@ -6,7 +7,8 @@ def index(request):
 
 
 def market(request):
-    return render(request, 'market/market.html')
+    form = MarketFilterForm()
+    return render(request, 'market/market.html', {'form': form})
 
 
 def item(request):

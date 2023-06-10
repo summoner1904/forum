@@ -21,9 +21,9 @@
                     <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
                 </ul>
                 {% if user.is_authenticated %}
-                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
                     </div>
-                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
                 {% else %}
                     <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}" class="btn btn-primary" type="button">Войти</a></div>
                     </div>
