@@ -15,6 +15,7 @@ class UserProfile(AbstractUser):
     subscribes = models.IntegerField(verbose_name='Подписчики', default=0)
     product = models.IntegerField(verbose_name='Товаров', default=0)
     avatar = models.ImageField(upload_to='images_profile/%Y-%m-%d', default='images_profile/2023-05-27/caf098e477ae55905890b7fb0b3700c1.jpg')
+    access = models.BooleanField(verbose_name='Доступ к маркету', default=False)
 
     def save(self, *args, **kwargs):
         self.last_login = datetime.datetime.now()
