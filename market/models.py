@@ -11,7 +11,7 @@ class Product(models.Model):
     lvl = models.IntegerField(verbose_name='Уровень', default=0, null=True)
     country = models.CharField(max_length=64, verbose_name='Страна')
     last_activity = models.DateField(verbose_name='Последняя активность')
-    skins = models.IntegerField(verbose_name='Скины')
+    skins = models.IntegerField(verbose_name='Скины', default=0, null=True)
 
     class Meta:
         verbose_name = 'Аккаунт'
