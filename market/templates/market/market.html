@@ -50,7 +50,65 @@
     <div class="row">
         <div class="col-md-6 col-xxl-3 offset-xxl-0"
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;">
-            <button class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">Продать товар</button>
+            <button class="btn btn-danger" type="button" style="width:100%;margin-bottom:30px;" id="openModalBtn">Продать товар</button>
+            <div style="color:white;display:none;" id="modalBlockId" class="modalBlock">
+                <div class="modal-content" id="modalContentId">
+                    <div class="block_for_close_button">
+                        <button id="closeModalBtn" class="btn_close" style="background:none;border:none;color: grey;">Закрыть</button>
+                    </div>
+                    <form action="{% url 'market:market' %}" method="post">
+                        {% csrf_token %}
+                        {% for i in sell %}
+                            <div class="form_inp">
+                                <div class="form_label">{{ i.label }}</div>
+                                <div class="form_input">{{ i }}</div>
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="btn-sell btn btn-danger" style="width: 100%;">Продать</button>
+                    </form>
+                </div>
+
+            </div>
+            <style>
+                .form_label{
+                    margin-bottom: 5px;
+                }
+                .form_inp{
+                    margin-bottom: 20px;
+                }
+                .block_for_close_button{
+                    justify-content: flex-end;
+                    display: flex;
+                }
+                .modalBlock{
+                    display: none;
+                    position: fixed;
+                    z-index: 1;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                }
+                .modal-content{
+                    border-radius: 10px;
+                    background-color: #1a1a1a;
+                    margin: 15% auto;
+                    padding: 20px;
+                    width: 400px;
+                }
+            </style>
+            <script>
+                var btnOpen = document.getElementById("openModalBtn");
+                var btnClose = document.getElementById("closeModalBtn");
+                var block = document.getElementById("modalBlockId")
+                btnOpen.onclick = function() {
+                    block.style.display = "block";
+                }
+                btnClose.onclick = function() {
+                    block.style.display = "none";
+                }
+            </script>
             <h5 class="text-light">Основное</h5>
             <p class="text-light" style="margin-left: 20px;">Торговля</p>
             <p class="text-light" style="margin-left: 20px;">Работа и услуги</p>
@@ -82,10 +140,7 @@
                         <p class="text-muted" style="margin-top:30px;">Цена</p>
                         {{ form.min_price }}
                         {{ form.max_price }}
-                        <button class="btn btn-danger text-center float-end" type="submit"
-                                style="width: 40%;margin-top: 10px;background: rgb(7,187,108);border-style: none;border-color: var(--bs-gray);color: rgb(255,255,255);height: 50px;">
-                            Применить
-                        </button>
+                        <button class="btn btn-success" style="width:100%;margin-top: 30px;height: 50px;" type="submit">Применить</button>
                     </form>
                 </div>
             </div>
@@ -178,6 +233,11 @@
         </div>
     </div>
 </div>
+<style>
+    input:focus{
+        outline: #313131 2px solid;
+    }
+</style>
 <script src="{% static 'market/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'market/assets/js/bs-init.js' %}"></script>
 </body>
