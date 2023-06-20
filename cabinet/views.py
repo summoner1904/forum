@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import UserProfile, Subscription
 from django.contrib.auth.decorators import login_required
 from .forms import SettingsProfileForm
-from django.http import JsonResponse
 
 
 def profile(request, pk):
