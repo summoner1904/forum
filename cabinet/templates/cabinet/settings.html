@@ -50,47 +50,61 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-light" style="margin-top: 30px;background: #1f1f1f;border-radius: 25px;">
+            <div style="margin-bottom: 30px;margin-top: 40px;">
+                <p class="text-end d-inline-block" style="width: 15%;">Доступ к маркету</p>
+                <a href="https://vk.com/">
+                    <button class="btn-success btn" style="margin-left: 15px; width: 60%;">Приобрести</button>
+                </a>
+                <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
+                    <p class="text-start text-muted" style="margin-left: 16px;">Необходим для осуществления операция на маркете</p>
+                </div>
+            </div>
             <form action="{% url 'cabinet:settings' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.username.label }}&nbsp;</p>{{form.username}}
+                    <p class="text-end d-inline-block"
+                       style="width: 15%;">{{ form.username.label }}&nbsp;</p>{{ form.username }}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Является вашим логином для входа</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.status.label }}&nbsp;</p>{{form.status}}
+                    <p class="text-end d-inline-block"
+                       style="width: 15%;">{{ form.status.label }}&nbsp;</p>{{ form.status }}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается рядом с вашим ником</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.telegram.label }}&nbsp;</p>{{form.telegram}}
+                    <p class="text-end d-inline-block"
+                       style="width: 15%;">{{ form.telegram.label }}&nbsp;</p>{{ form.telegram }}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;">{{ form.discord.label }}&nbsp;</p>{{form.discord}}
+                    <p class="text-end d-inline-block"
+                       style="width: 15%;">{{ form.discord.label }}&nbsp;</p>{{ form.discord }}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.avatar.label }}&nbsp;</p>{{form.avatar}}
+                    <p class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.avatar.label }}&nbsp;</p>{{ form.avatar }}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
                 <div style="margin-bottom: 30px;margin-top: 40px;">
                     <style>
-                        #cls_gender, .gender_classs{
+                        #cls_gender, .gender_classs {
                             display: inline-block;
                             vertical-align: top;
                         }
                     </style>
-                    <p id="cls_gender" class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.gender.label }}&nbsp;</p>
+                    <p id="cls_gender" class="text-end d-inline-block"
+                       style="width: 15%;margin-right: 20px;">{{ form.gender.label }}&nbsp;</p>
                     <div class="gender_classs" class="gender_cls">
                         {{ form.gender }}
                     </div>
@@ -100,13 +114,17 @@
                 </div>
 
                 <div style="margin-bottom: 30px;margin-top: 40px;">
-                    <p class="text-end d-inline-block" style="width: 15%;margin-right: 20px;">{{ form.date_birthday.label }}&nbsp;</p>{{form.date_birthday}}
+                    <p class="text-end d-inline-block"
+                       style="width: 15%;margin-right: 20px;">{{ form.date_birthday.label }}&nbsp;</p>{{ form.date_birthday }}
                     <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
                         <p class="text-start text-muted" style="margin-left: 16px;">Отображается в профиле</p>
                     </div>
                 </div>
 
-                <button type="submit" style="margin-left: 15%;margin-bottom: 30px;width: 50%;height: 50px;border-radius: 10px; border: none; background-color: #34bb80;">Сохранить изменения</button>
+                <button type="submit"
+                        style="margin-left: 15%;margin-bottom: 30px;width: 50%;height: 50px;border-radius: 10px; border: none; background-color: #34bb80;">
+                    Сохранить изменения
+                </button>
             </form>
         </div>
     </div>
