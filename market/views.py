@@ -1,5 +1,5 @@
 import datetime
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import MarketFilterForm, SellAccountForm
 from .models import Product
@@ -12,15 +12,17 @@ def index(request):
 def market(request):
     form = MarketFilterForm()
     sell = SellAccountForm()
-    items = list(Product.objects.all())
-    print(items)
     if request.method == 'POST':
-        if not request.user.access:
-            return redirect("cabinet:profile", request.user.pk)
         data = request.POST
-        Product.objects.create(title=data['title'], price=data['price'], link=data['link'], phone=data['phone'],
-                               mail=data['mail'], last_activity=datetime.datetime.now())
-    return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
+        links = [i.link for i in list(Product.objects.all())]
+        link = dict(data)['link']
+        if "".join(link) in links:
+            messages.error(request, 'Этот аккаунт уже находится на продаже.')
+        else:
+            Product.objects.create(title=data['title'], price=data['price'], link=data['link'], phone=data['phone'],
+                                   mail=data['mail'], last_activity=datetime.datetime.now())
+            messages.success(request, 'Аккаунт успешно выставлен на маркет.')
+    return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': list(Product.objects.all())})
 
 
 def item(request):
@@ -29,4 +31,3 @@ def item(request):
 
 def sell_account(request):
     pass
-
