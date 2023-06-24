@@ -1,6 +1,6 @@
 import datetime
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import MarketFilterForm, SellAccountForm
 from .models import Product
 
@@ -11,23 +11,20 @@ def index(request):
 
 def market(request):
     form = MarketFilterForm()
-    sell = SellAccountForm()
+    sell = SellAccountForm(request.POST)
+    items = list(Product.objects.all())
     if request.method == 'POST':
-        data = request.POST
-        links = [i.link for i in list(Product.objects.all())]
-        link = dict(data)['link']
-        if "".join(link) in links:
-            messages.error(request, 'Этот аккаунт уже находится на продаже.')
-        else:
-            Product.objects.create(title=data['title'], price=data['price'], link=data['link'], phone=data['phone'],
-                                   mail=data['mail'], last_activity=datetime.datetime.now())
+        if sell.is_valid():
+            data = sell.cleaned_data
+            lst = list(Product.objects.all())
+            if data['link'] in [i.link for i in lst]:
+                messages.error(request, 'Этот аккаунт уже есть на маркете.')
+                return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
+            Product.objects.create(**data)
             messages.success(request, 'Аккаунт успешно выставлен на маркет.')
-    return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': list(Product.objects.all())})
+    return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
 
 
-def item(request):
-    return render(request, 'market/item.html')
-
-
-def sell_account(request):
-    pass
+def item(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'market/item.html', {'item': product})
