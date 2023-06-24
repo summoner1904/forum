@@ -1,4 +1,3 @@
-{% load humanize %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -51,73 +50,9 @@
     <div class="row">
         <div class="col-md-6 col-xxl-3 offset-xxl-0"
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;">
-            <button class="btn btn-danger" type="button" style="width:100%;margin-bottom:30px;" id="openModalBtn">
+            <button id="openModalBtn" class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">
                 Продать товар
             </button>
-            <div style="color:white;display:none;" id="modalBlockId" class="modalBlock">
-                <div class="modal-content" id="modalContentId">
-                    <div class="block_for_close_button">
-                        <button id="closeModalBtn" class="btn_close" style="background:none;border:none;color: grey;">
-                            Закрыть
-                        </button>
-                    </div>
-                    <form action="{% url 'market:market' %}" method="post">
-                        {% csrf_token %}
-                        {% for i in sell %}
-                            <div class="form_inp">
-                                <div class="form_label">{{ i.label }}</div>
-                                <div class="form_input">{{ i }}</div>
-                            </div>
-                        {% endfor %}
-                        <button type="submit" class="btn-sell btn btn-danger" style="width: 100%;">Продать</button>
-                    </form>
-                </div>
-
-            </div>
-            <style>
-                .form_label {
-                    margin-bottom: 5px;
-                }
-
-                .form_inp {
-                    margin-bottom: 20px;
-                }
-
-                .block_for_close_button {
-                    justify-content: flex-end;
-                    display: flex;
-                }
-
-                .modalBlock {
-                    display: none;
-                    position: fixed;
-                    z-index: 1;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(0, 0, 0, 0.5);
-                }
-
-                .modal-content {
-                    border-radius: 10px;
-                    background-color: #1a1a1a;
-                    margin: 15% auto;
-                    padding: 20px;
-                    width: 400px;
-                }
-            </style>
-            <script>
-                var btnOpen = document.getElementById("openModalBtn");
-                var btnClose = document.getElementById("closeModalBtn");
-                var block = document.getElementById("modalBlockId")
-                btnOpen.onclick = function () {
-                    block.style.display = "block";
-                }
-                btnClose.onclick = function () {
-                    block.style.display = "none";
-                }
-            </script>
             <h5 class="text-light">Основное</h5>
             <p class="text-light" style="margin-left: 20px;">Торговля</p>
             <p class="text-light" style="margin-left: 20px;">Работа и услуги</p>
@@ -133,63 +68,116 @@
             <p class="text-light" style="margin-left: 20px;">Программирование</p>
             <p class="text-light" style="margin-left: 20px;">Веб-разработка</p>
         </div>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background: #111111; color: white;padding: 30px;border-radius: 10px;">
+                    <div class="closeBtn" style="text-align: right;padding-right: 20px;">
+                        <button id="closeModalBtn" class="btn btn-danger">Закрыть</button>
+                    </div>
+                    <form action="{% url 'market:market' %}" method="post">
+                        {% csrf_token %}
+                        {{ sell.as_p }}
+                        <button type="submit" style="width: 100%;margin-top: 20px;" class="btn btn-success">Продать
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <style>
+            ul.errorlist {
+                display: none;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#openModalBtn").click(function () {
+                    $("#myModal").modal("show");
+                });
+                $("#closeModalBtn").click(function () {
+                    $("#myModal").modal("hide");
+                });
+            });
+        </script>
+
         <div class="col-md-6 col-xxl-8 offset-xxl-1 pulse animated"
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;padding-left: 50px;">
             <h3 class="text-muted">Маркет</h3>
+            <p class="text-muted">Раздел форума, позволяющий пользователям выставлять свои аккаунты на продажу. Обратите
+                внимание, что выкладывать объявления могут только зарегистрированные пользователи, оплатившие данную
+                возможность.&nbsp;<br><br>Если возникли проблемы с аккаунтом, создайте арбитраж с подробным описанием
+                проблемы.</p>
             {% if messages %}
                 {% for message in messages %}
-                    <div class="{{ message.tags }}"
-                         style="color: white;font-size: 18px;padding:20px;border-radius: 10px;">
+                    <div class="{{ message.tags }}">
                         {{ message }}
                     </div>
                 {% endfor %}
-                <style>
-                    .error {
-                        background-color: rgb(220, 53, 69);
-                    }
-
-                    .success {
-                        background-color: rgb(25, 135, 84);
-                    }
-                </style>
-            {% else %}
-                <p class="text-muted">Раздел форума, позволяющий пользователям выставлять свои аккаунты на продажу.
-                    Обратите
-                    внимание, что выкладывать объявления могут только зарегистрированные пользователи, оплатившие данную
-                    возможность.&nbsp;<br><br>Если возникли проблемы с аккаунтом, создайте арбитраж с подробным
-                    описанием
-                    проблемы.</p>
             {% endif %}
+            <style>
+                .success{
+                    background: rgb(25,134,83);
+                    color: white;
+                    border-radius: 10px;
+                    padding-left: 20px;
+                    height: 50px;
+                    display: flex;
+                    margin-bottom: 20px;
+                    align-items: center;
+                }
+                .error{
+                    background: rgb(220,53,69);
+                    color: white;
+                    border-radius: 10px;
+                    padding-left: 20px;
+                    height: 50px;
+                    display: flex;
+                    margin-bottom: 20px;
+                    align-items: center;
+                }
+            </style>
             <div class="row">
                 <div class="col">
                     <form action="{% url 'market:market' %}" method="post">
                         {% csrf_token %}
                         <h5 class="text-muted">Фильтры поиска</h5>
-                        {{ form.title_input }}
-                        <p class="text-muted" style="margin-top:30px;">Цена</p>
-                        {{ form.min_price }}
-                        {{ form.max_price }}
-                        <button class="btn btn-success" style="width:100%;margin-top: 30px;height: 50px;" type="submit">
-                            Применить
+                        <div class="search_for_title">
+                            {{ form.title_input }}
+                        </div>
+                        <div class="price_filter" style="margin-top: 20px;">
+                            <h5 class="text-muted">Цена</h5>
+                            <div class="price-block-filter">
+                                {{ form.min_price }}
+                                {{ form.max_price }}
+                                <span class="text-muted">RUB</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-success"
+                                style="display: block;margin-top: 15px;width: 100%;height: 45px;">Применить
                         </button>
                     </form>
                 </div>
             </div>
             <div class="card text-light"
-                 style="margin-top: 50px;border-style: none;border-radius: 20px;background: rgb(31,31,31);">
+                 style="margin-top: 50px;border-style: none;border-radius: 20px;background: rgb(31,31,31);" id="item-list">
                 {% for item in items %}
-                    <div class="card-body bg-dark border-0 d-block"
-                         style="border-style: none;border-radius: 20px;margin-top: 30px;">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                        <h6 class="text-muted card-subtitle mb-2">{{ item.price }} RUB</h6><a
-                            class="text-center d-inline-block card-link" href="{{ item.link }}"
-                            style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">Перейти</a><a
-                            class="text-center d-inline-block card-link" href="#"
-                            style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.last_activity|date:"Y-m-d" | naturaltime}}</a><a
-                            class="text-center d-inline-block card-link" href="{{ item.link }}"
-                            style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">414ур.
-                        </a>
-                    </div>
+                    <a href="{% url 'market:item' item.pk %}" style="text-decoration: none; color: white;">
+                        <div class="card-body bg-dark border-0 d-block"
+                             style="border-style: none;border-radius: 20px;margin-bottom: 20px;">
+                            <h5 class="card-title">{{ item.title }}</h5>
+                            <h6 class="text-muted card-subtitle mb-2" style="color: white;">{{ item.price }} RUB</h6>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.country }}</a>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.skins }}
+                                Скина</a>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.mail }}</a>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.phone }}</a>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>
@@ -197,9 +185,10 @@
 </div>
 <style>
     input:focus {
-        outline: #313131 2px solid;
+        outline: #2c2c2c solid 3px;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'market/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'market/assets/js/bs-init.js' %}"></script>
 </body>
