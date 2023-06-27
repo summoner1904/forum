@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Страница товара</title>
+    <link rel="stylesheet" href="{% static 'market/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'market/assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'market/assets/css/styles.css' %}">
+</head>
+
+<body class="bg-dark">
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span class="fs-5 fw-bold">ITPONIC</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
+                </ul>
+                {% if user.is_authenticated %}
+                    <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                    </div>
+                    <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a><a href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+                {% else %}
+                    <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}" class="btn btn-primary" type="button">Войти</a></div>
+                    </div>
+                    <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a class="btn btn-primary" role="button" href="{% url 'account_login' %}">Войти</a></div>
+                {% endif %}
+    </nav>
+    <div class="container" style="margin-top: 75px;">
+        <div class="row">
+            <div class="col-md-6 col-xxl-3 offset-xxl-0" style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;"><button class="btn btn-success" type="button" style="width: 100%;margin-bottom: 30px;">Приобрести</button>
+                <h5 class="text-light">Основное</h5>
+                <p class="text-light" style="margin-left: 20px;">Торговля</p>
+                <p class="text-light" style="margin-left: 20px;">Работа и услуги</p>
+                <p class="text-light" style="margin-left: 20px;">Арбитражи</p>
+                <h5 class="text-light">Тематическое</h5>
+                <p class="text-light" style="margin-left: 20px;">Статьи</p>
+                <p class="text-light" style="margin-left: 20px;">ChatGPT</p>
+                <p class="text-light" style="margin-left: 20px;">Софт</p>
+                <p class="text-light" style="margin-left: 20px;">Тематические вопросы</p>
+                <h5 class="text-light">Общий раздел</h5>
+                <p class="text-light" style="margin-left: 20px;">Компьютеры</p>
+                <p class="text-light" style="margin-left: 20px;">Телефоны</p>
+                <p class="text-light" style="margin-left: 20px;">Программирование</p>
+                <p class="text-light" style="margin-left: 20px;">Веб-разработка</p>
+            </div>
+            <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light pulse animated" style="background: #1f1f1f;padding: 30px;border-radius: 20px;padding-left: 50px;height: 100%;">
+                <section class="py-4 py-xl-5">
+                    <div class="container">
+                        <div class="text-white border rounded border-0 p-4 p-md-5" style="width: 100%;background: rgb(39,39,39);border-radius: 25px;margin-top: -40px;">
+                            <h4 class="fw-bold text-white mb-3">{{ item.title }}</h4>
+                            <p class="mb-4">{{ item.description }}</p>
+                            <div class="my-3"><a href="{{ item.link }}" target="_blank" class="btn btn-success btn-sm" type="button" style="margin-left: -1px;">Перейти</a><button class="btn btn-success btn-sm" type="button" style="margin-left: 5px;">В избранное</button><a class="btn btn-light btn-sm disabled" role="button" href="#" style="margin-left: 6px;">{{ item.price }} RUB</a></div>
+                            <p class="text-success" style="padding-top: 25px;">Данные от аккаунта - сразу после покупки.</p>
+                            <p class="text-success">Гарантия на момент покупки.</p>
+                            {% if item.mail == 'Да' %}
+                                <p class="text-success">Имеется доступ к почте от аккаунта.</p>
+                            {% else %}
+                                <p class="text-danger">Отсутствует доступ к почте от аккаунта.</p>
+                            {% endif %}
+                        </div>
+                        <div style="border-radius: 25px;margin-top: 20px;background: #272727;">
+                            <h5 style="margin-left: 10px;padding-top: 15px;padding-left: 20px;">Общая информация</h5>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">{{ item.nickname }}</p>
+                                <p class="text-muted">Отображаемое имя</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">{{ item.mail }}</p>
+                                <p class="text-muted">Привязка к почте</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">{{ item.phone }}</p>
+                                <p class="text-muted">Привязка к телефону</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">17.02.2018</p>
+                                <p class="text-muted">Регистрация аккаунта</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">643</p>
+                                <p class="text-muted">Матчей</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">{{ item.lvl }}</p>
+                                <p class="text-muted">Уровень</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">Личный</p>
+                                <p class="text-muted">Происхождение аккаунта</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">{{ item.country }}</p>
+                                <p class="text-muted">Страна аккаунта</p>
+                            </div>
+                            <div class="d-inline-block" style="width: 200px;margin-top: 30px;margin-left: 50px;">
+                                <p style="margin-bottom: 4px;">{{ item.last_activity }}</p>
+                                <p class="text-muted">Последняя активность</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'market/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'market/assets/js/bs-init.js' %}"></script>
+</body>
+
+</html>

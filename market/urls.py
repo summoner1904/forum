@@ -6,5 +6,5 @@ app_name = 'market'
 urlpatterns = [
     path('', index, name='index'),
     path('market/', market, name='market'),
-    path('item/<int:pk>', item, name='item')
+    path('item/<int:pk>', item, name='item'),
 ]

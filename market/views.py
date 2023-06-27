@@ -1,4 +1,5 @@
-import datetime
+import requests
+from requests.exceptions import MissingSchema, ConnectionError
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import MarketFilterForm, SellAccountForm
@@ -17,6 +18,11 @@ def market(request):
         if sell.is_valid():
             data = sell.cleaned_data
             lst = list(Product.objects.all())
+            try:
+                r = requests.get(url=data['link'])
+            except (ConnectionError, MissingSchema):
+                messages.error(request, 'Некорректная ссылка на аккаунт.')
+                return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
             if data['link'] in [i.link for i in lst]:
                 messages.error(request, 'Этот аккаунт уже есть на маркете.')
                 return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
@@ -27,12 +33,9 @@ def market(request):
             title = data.get('title', '')
             min_price = data.get('min_price')
             max_price = data.get('max_price')
-
             products = Product.objects.all()
-
             if title:
                 products = products.filter(title__icontains=title)
-
             if min_price is not None and max_price is not None:
                 products = products.filter(price__range=(min_price, max_price))
             elif min_price is not None:
@@ -42,7 +45,6 @@ def market(request):
             if not products:
                 no_results_message = "Подходящих товаров не найдено."
                 return render(request, 'market/market.html', {'no_results_message': no_results_message, 'form': form, 'sell': sell})
-
             return render(request, 'market/market.html', {'products': products, 'form': form, 'sell': sell})
 
     return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
