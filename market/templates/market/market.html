@@ -116,8 +116,8 @@
                 {% endfor %}
             {% endif %}
             <style>
-                .success{
-                    background: rgb(25,134,83);
+                .success {
+                    background: rgb(25, 134, 83);
                     color: white;
                     border-radius: 10px;
                     padding-left: 20px;
@@ -126,8 +126,9 @@
                     margin-bottom: 20px;
                     align-items: center;
                 }
-                .error{
-                    background: rgb(220,53,69);
+
+                .error {
+                    background: rgb(220, 53, 69);
                     color: white;
                     border-radius: 10px;
                     padding-left: 20px;
@@ -143,7 +144,7 @@
                         {% csrf_token %}
                         <h5 class="text-muted">Фильтры поиска</h5>
                         <div class="search_for_title">
-                            {{ form.title_input }}
+                            {{ form.title }}
                         </div>
                         <div class="price_filter" style="margin-top: 20px;">
                             <h5 class="text-muted">Цена</h5>
@@ -153,14 +154,39 @@
                                 <span class="text-muted">RUB</span>
                             </div>
                         </div>
-                        <button class="btn btn-success"
+                        <button type="submit" class="btn btn-success"
                                 style="display: block;margin-top: 15px;width: 100%;height: 45px;">Применить
                         </button>
                     </form>
                 </div>
             </div>
+            {% if products %}
+                <div class="card text-light"
+                 style="margin-top: 50px;border-style: none;border-radius: 20px;background: rgb(31,31,31);"
+                 id="item-list">
+                {% for product in products %}
+                    <a href="{% url 'market:item' product.pk %}" style="text-decoration: none; color: white;">
+                        <div class="card-body bg-dark border-0 d-block"
+                             style="border-style: none;border-radius: 20px;margin-bottom: 20px;">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <h6 class="text-muted card-subtitle mb-2" style="color: white;">{{ product.price }} RUB</h6>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ product.country }}</a>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ product.skins }}
+                                Скина</a>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ product.mail }}</a>
+                            <a class="text-center d-inline-block card-link" href="#"
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ product.phone }}</a>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            {% else %}
             <div class="card text-light"
-                 style="margin-top: 50px;border-style: none;border-radius: 20px;background: rgb(31,31,31);" id="item-list">
+                 style="margin-top: 50px;border-style: none;border-radius: 20px;background: rgb(31,31,31);"
+                 id="item-list">
                 {% for item in items %}
                     <a href="{% url 'market:item' item.pk %}" style="text-decoration: none; color: white;">
                         <div class="card-body bg-dark border-0 d-block"
@@ -170,8 +196,7 @@
                             <a class="text-center d-inline-block card-link" href="#"
                                style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.country }}</a>
                             <a class="text-center d-inline-block card-link" href="#"
-                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.skins }}
-                                Скина</a>
+                               style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.skins }} Скина</a>
                             <a class="text-center d-inline-block card-link" href="#"
                                style="border-style: none;width: 100px;height: 30px;background: #2d2d2d;border-radius: 10px;color: rgb(152,152,152);margin-top: 10px;">{{ item.mail }}</a>
                             <a class="text-center d-inline-block card-link" href="#"
@@ -180,6 +205,10 @@
                     </a>
                 {% endfor %}
             </div>
+            {% endif %}
+            {% if no_results_message %}
+                <h4 style="text-align: center;color: #989898;margin-top: 30px;">{{ no_results_message }}</h4>
+            {% endif %}
         </div>
     </div>
 </div>
