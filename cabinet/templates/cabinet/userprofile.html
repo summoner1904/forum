@@ -58,7 +58,7 @@
 {% endblock %}
 
 {% block registration %}
-    {{ user.date_joined | naturalday}}
+    {{ user.date_joined | timesince }}
 {% endblock %}
 
 {% block date_joined %}
