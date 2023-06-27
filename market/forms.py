@@ -2,7 +2,7 @@ from django import forms
 
 
 class MarketFilterForm(forms.Form):
-    title_input = forms.CharField(
+    title = forms.CharField(
         max_length=64,
         widget=forms.TextInput(
             attrs={
