@@ -3,6 +3,7 @@ from .models import UserProfile, Subscription
 from django.contrib.auth.decorators import login_required
 from .forms import SettingsProfileForm
 from .payment import create_bill, check_state
+from django.contrib import messages
 
 
 def profile(request, pk):
@@ -36,4 +37,7 @@ def settings_profile(request):
                 if field_value:
                     setattr(request.user, field_name, field_value)
             UserProfile.save(request.user)
+            messages.success(request, 'Данные профиля успешно обновлены.')
+        else:
+            messages.error(request, 'Произошла ошибка при обновлении даных профиля.')
     return render(request, 'cabinet/settings.html', {'form': form, 'url_payment': bill['url']})
