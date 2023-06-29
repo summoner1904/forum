@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import MarketFilterForm, SellAccountForm
 from .models import Product
+from cabinet.models import UserProfile
 
 
 def index(request):
@@ -28,6 +29,9 @@ def market(request):
                 return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
             Product.objects.create(**data)
             messages.success(request, 'Аккаунт успешно выставлен на маркет.')
+            user = list(UserProfile.objects.filter(pk=request.user.pk))
+            user[0].product += 1
+            UserProfile.save(user[0])
         if form.is_valid():
             data = form.cleaned_data
             title = data.get('title', '')
