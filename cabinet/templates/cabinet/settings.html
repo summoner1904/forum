@@ -51,12 +51,43 @@
     <div class="row">
         <div class="col-md-12 text-light" style="margin-top: 30px;background: #1f1f1f;border-radius: 25px;">
             <div style="margin-bottom: 30px;margin-top: 40px;">
+                {% for message in messages %}
+                    <div class="{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <style>
+                    .success {
+                        background: rgb(25, 134, 83);
+                        color: white;
+                        width: 80%;
+                        border-radius: 10px;
+                        padding-left: 20px;
+                        height: 50px;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 auto 50px;
+                    }
+
+                    .error {
+                        background: rgb(220, 53, 69);
+                        color: white;
+                        width: 80%;
+                        border-radius: 10px;
+                        padding-left: 20px;
+                        height: 50px;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 auto 50px;
+                    }
+                </style>
                 <p class="text-end d-inline-block" style="width: 15%;">Доступ к маркету</p>
                 <a href="{{ url_payment }}" target="_blank">
                     <button class="btn-success btn" style="margin-left: 15px; width: 60%;">Приобрести</button>
                 </a>
                 <div class="d-xxl-flex m-auto justify-content-xxl-start" style="width: 67%;">
-                    <p class="text-start text-muted" style="margin-left: 16px;">Необходим для осуществления операция на маркете</p>
+                    <p class="text-start text-muted" style="margin-left: 16px;">Необходим для осуществления операция на
+                        маркете</p>
                 </div>
             </div>
             <form action="{% url 'cabinet:settings' %}" method="post" enctype="multipart/form-data">
