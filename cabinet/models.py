@@ -5,6 +5,7 @@ import datetime
 
 
 class UserProfile(AbstractUser):
+    date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     status = models.CharField(max_length=128, blank=True)
     date_birthday = models.DateField(blank=True, null=True, default='1970-01-01', verbose_name='День рождения')
     telegram = models.CharField(max_length=64, default='Неизвестно', null=True, verbose_name='Telegram', blank=True)
@@ -31,6 +32,7 @@ class UserProfile(AbstractUser):
 
 UserProfile = get_user_model()
 
+
 class Subscription(models.Model):
     subscriber = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='subscriptions_made',
                                    verbose_name='Подписчик')
@@ -39,3 +41,13 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.subscriber} подписан на {self.subscribed_to}'
+
+
+class Posts(models.Model):
+    sender = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='sent_posts',
+                               verbose_name='Отправитель')
+    poster = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='received_posts',
+                               verbose_name='Получатель')
+    text_post = models.CharField(max_length=6144, verbose_name='Текст поста')
+    created_at = models.DateTimeField(verbose_name='Время создания', auto_now=True)
+

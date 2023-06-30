@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from .models import UserProfile, Subscription
+from .models import UserProfile, Subscription, Posts
 from django.contrib.auth.decorators import login_required
-from .forms import SettingsProfileForm
+from .forms import SettingsProfileForm, PostProfileForm
 from .payment import create_bill, check_state
 from django.contrib import messages
 
 
 def profile(request, pk):
     user = get_object_or_404(UserProfile, pk=pk)
+    post_form = PostProfileForm(request.POST)
     subscribed = False
     if Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
         subscribed = True
@@ -17,7 +18,13 @@ def profile(request, pk):
             Subscription.objects.create(subscriber=request.user, subscribed_to=user)
         else:
             subscribed = True
-    return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed})
+    if post_form.is_valid():
+        data = post_form.cleaned_data
+        poster = UserProfile.objects.get(pk=pk)
+        Posts.objects.create(sender=request.user, poster=poster, text_post=data['text_post'])
+    posts = Posts.objects.filter(poster_id=pk)
+
+    return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed, 'post_form': post_form, 'posts': posts})
 
 
 @login_required
@@ -41,3 +48,4 @@ def settings_profile(request):
         else:
             messages.error(request, 'Произошла ошибка при обновлении даных профиля.')
     return render(request, 'cabinet/settings.html', {'form': form, 'url_payment': bill['url']})
+

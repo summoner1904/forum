@@ -76,16 +76,13 @@
                                 type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
                             Вы подписаны
                         </button>
-                        <button class="btn btn-danger text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
-                                type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
-                            Отписаться
-                        </button>
                     {% endif %}
                 </form>
+
             {% endif %}
         </div>
         <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light"
-             style="padding: 20px;background: #1f1f1f;border-radius: 25px;">
+             style="padding: 20px;background: #1f1f1f;border-radius: 25px;height: 100%;">
             <div>
                 <div style="padding-left: 15px;">
                     <h5 class="d-inline-block">{% block username %}{% endblock %}</h5>
@@ -166,193 +163,48 @@
                 </div>
             </div>
             <hr>
-            <div style="padding: 30px;margin-bottom: 9px;width: 100%;"><img class="d-inline-block" src="
-                    {% block image_profile1 %}{% endblock %}" style="border-radius: 30px;" width="55" height="55"><input
-                    class="d-inline-block" type="text"
-                    style="width: 75%;padding-left: 10px;border-style: none;background: rgb(59,59,59);color: rgb(255,255,255);margin-left: 10px;height: 40px;"
-                    placeholder="Напишите что-нибудь...">
-                <button class="btn btn-success btn-sm d-block float-none" type="button"
-                        style="height: 40px;margin-top: 10px;margin-left: 65px;">Опубликовать
-                </button>
-            </div>
-            <hr>
-            <div style="padding: 30px;">
-                <div style="margin-bottom: 20px;"><img class="d-inline-block"
-                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
-                                                       width="50" style="border-radius: 30px;">
-                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                    <p class="text-muted d-inline-block float-end">14.04.22</p>
-                    <p class="text-start">Django - это фреймворк для веб-разработки, написанный на Python в 2005 году.
-                        Он позволяет создавать сайты и веб-приложения разной сложности - отличного блога до
-                        аудиоплатформы (на нем собран Spotify). От других фреймворков Django отличается модульностью и
-                        простотой освоения.</p>
-                </div>
-                <p class="text-muted d-inline-block" style="margin-right: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                    </svg>
-                    Мне нравится!
-                </p>
-                <p class="text-muted d-inline-block" style="margin-left: 0px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                         style="margin-right: 10px;">
-                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    Прокомментировать
-                </p>
-            </div>
-            <div style="padding: 30px;">
-                <div style="margin-bottom: 20px;"><img class="d-inline-block"
-                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
-                                                       width="50" style="border-radius: 30px;">
-                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                    <p class="text-muted d-inline-block float-end">14.04.22</p>
-                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
-                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
-                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                </div>
-                <p class="text-muted d-inline-block" style="margin-right: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                    </svg>
-                    Мне нравится!
-                </p>
-                <p class="text-muted d-inline-block" style="margin-left: 0px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                         style="margin-right: 10px;">
-                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    Прокомментировать
-                </p>
-            </div>
-            <div style="padding: 30px;">
-                <div style="margin-bottom: 20px;"><img class="d-inline-block"
-                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
-                                                       width="50" style="border-radius: 30px;">
-                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                    <p class="text-muted d-inline-block float-end">14.04.22</p>
-                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
-                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
-                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                </div>
-                <p class="text-muted d-inline-block" style="margin-right: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                    </svg>
-                    Мне нравится!
-                </p>
-                <p class="text-muted d-inline-block" style="margin-left: 0px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                         style="margin-right: 10px;">
-                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    Прокомментировать
-                </p>
-            </div>
-            <div style="padding: 30px;">
-                <div style="margin-bottom: 20px;"><img class="d-inline-block"
-                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
-                                                       width="50" style="border-radius: 30px;">
-                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                    <p class="text-muted d-inline-block float-end">14.04.22</p>
-                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
-                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
-                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                </div>
-                <p class="text-muted d-inline-block" style="margin-right: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                    </svg>
-                    Мне нравится!
-                </p>
-                <p class="text-muted d-inline-block" style="margin-left: 0px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                         style="margin-right: 10px;">
-                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    Прокомментировать
-                </p>
-            </div>
-            <div style="padding: 30px;">
-                <div style="margin-bottom: 20px;"><img class="d-inline-block"
-                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
-                                                       width="50" style="border-radius: 30px;">
-                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                    <p class="text-muted d-inline-block float-end">14.04.22</p>
-                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
-                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
-                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                </div>
-                <p class="text-muted d-inline-block" style="margin-right: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                    </svg>
-                    Мне нравится!
-                </p>
-                <p class="text-muted d-inline-block" style="margin-left: 0px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                         style="margin-right: 10px;">
-                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    Прокомментировать
-                </p>
-            </div>
-            <div style="padding: 30px;">
-                <div style="margin-bottom: 20px;"><img class="d-inline-block"
-                                                       src="{% static 'cabinet/assets/img/d709ccb43205b747573432ccdf2d1771.jpg' %}"
-                                                       width="50" style="border-radius: 30px;">
-                    <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">summoner</p>
-                    <p class="text-muted d-inline-block float-end">14.04.22</p>
-                    <p>Django - это фреймворк для веб-разработки, написанный на Python в 2005 году. Он позволяет
-                        создавать сайты и веб-приложения разной сложности - отличного блога до аудиоплатформы (на нем
-                        собран Spotify). От других фреймворков Django отличается модульностью и простотой освоения.</p>
-                </div>
-                <p class="text-muted d-inline-block" style="margin-right: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                         viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                    </svg>
-                    Мне нравится!
-                </p>
-                <p class="text-muted d-inline-block" style="margin-left: 0px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
-                         style="margin-right: 10px;">
-                        <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
-                        <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    Прокомментировать
-                </p>
-            </div>
+            <form action="{% url 'cabinet:profile' user.pk %}" method="post">
+                {% csrf_token %}
+                <div style="padding: 30px;margin-bottom: 9px;width: 100%;"><img class="d-inline-block" src="
+                    {% block image_profile1 %}{% endblock %}" style="border-radius: 30px;" width="55" height="55">
+                    {{ post_form.text_post }}
+                    <button class="btn btn-success btn-sm d-block float-none" type="submit"
+                            style="height: 40px;margin-top: 10px;margin-left: 70px;">Опубликовать
+                    </button>
+            </form>
         </div>
+        <hr>
+        {% for post in posts %}
+            <div style="padding: 30px;">
+            <div style="margin-bottom: 20px;"><img class="d-inline-block"
+                                                   src="../../media/{{ post.sender.avatar }}"
+                                                   width="50" style="border-radius: 30px;">
+                <p class="d-inline-block" style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">{{ post.sender.username }}</p>
+                <p class="text-muted d-inline-block float-end">{{ post.created_at }}</p>
+                <p class="text-start" style="margin-top: 10px;">{{ post.text_post }}</p>
+            </div>
+            <p class="text-muted d-inline-block" style="margin-right: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                     viewBox="0 0 16 16" class="bi bi-heart" style="margin-right: 10px;">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                </svg>
+                Мне нравится!
+            </p>
+            <p class="text-muted d-inline-block" style="margin-left: 0px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                     style="margin-right: 10px;">
+                    <path d="M17 9H7V7H17V9Z" fill="currentColor"></path>
+                    <path d="M7 13H17V11H7V13Z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M2 18V2H22V18H16V22H14C11.7909 22 10 20.2091 10 18H2ZM12 16V18C12 19.1046 12.8954 20 14 20V16H20V4H4V16H12Z"
+                          fill="currentColor"></path>
+                </svg>
+                Прокомментировать
+            </p>
+        </div>
+        {% endfor %}
     </div>
+</div>
 </div>
 <script src="{% static 'cabinet/assets/bootstrap/js/bootstrap.min.js' %}"></script>
 </body>

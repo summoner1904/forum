@@ -18,3 +18,6 @@ class SettingsProfileForm(forms.Form):
     date_birthday = forms.DateField(widget=forms.DateInput(attrs={'style': 'padding-left:10px;border-style: none;border-radius: 5px;color: rgb(255,255,255);background: rgb(92,92,92);height: 35px;','type': 'date'}), label='День рождения', required=False)
     gender = forms.ChoiceField(widget=forms.RadioSelect(attrs={'style': 'margin-bottom: 20px;'}), choices=GENDER_CHOICES, label='Пол', required=False)
 
+
+class PostProfileForm(forms.Form):
+    text_post = forms.CharField(max_length=6144, widget=forms.TextInput(attrs={'placeholder': 'Напишите что-нибудь...', 'style': 'width: 75%;padding-left: 10px;border-style: none;background: rgb(59,59,59);color: rgb(255,255,255);margin-left: 10px;height: 40px;'}))

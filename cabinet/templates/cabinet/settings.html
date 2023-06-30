@@ -92,7 +92,6 @@
             </div>
             <form action="{% url 'cabinet:settings' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-
                 <div style="margin-bottom: 30px;margin-top: 40px;">
                     <p class="text-end d-inline-block"
                        style="width: 15%;">{{ form.username.label }}&nbsp;</p>{{ form.username }}
