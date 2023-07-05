@@ -10,21 +10,24 @@ def profile(request, pk):
     user = get_object_or_404(UserProfile, pk=pk)
     post_form = PostProfileForm(request.POST)
     subscribed = False
-    if Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
-        subscribed = True
-    if request.method == 'POST':
-        # Проверка на то - есть ли подписка этого пользователя на этого юзера.
-        if not Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
-            Subscription.objects.create(subscriber=request.user, subscribed_to=user)
-        else:
-            subscribed = True
     if post_form.is_valid():
         data = post_form.cleaned_data
         poster = UserProfile.objects.get(pk=pk)
         Posts.objects.create(sender=request.user, poster=poster, text_post=data['text_post'])
     posts = Posts.objects.filter(poster_id=pk)
+    subscription = Subscription.objects.filter(subscriber_id=pk)
 
-    return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed, 'post_form': post_form, 'posts': posts})
+    if request.method == 'POST':
+        # Проверка на то - есть ли подписка этого пользователя на этого юзера.
+        if not Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
+            Subscription.objects.create(subscriber=request.user, subscribed_to=user)
+            subscribed = True
+            return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed, 'post_form': post_form, 'posts': posts})
+        else:
+            sub = Subscription.objects.filter(subscriber=request.user, subscribed_to=user)
+            sub.delete()
+            subscribed = False
+    return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed, 'post_form': post_form, 'posts': posts, 'subscription': subscription})
 
 
 @login_required
@@ -33,10 +36,8 @@ def settings_profile(request):
     form = SettingsProfileForm(request.POST, request.FILES)
     if check_state(bill['id']):
         user = get_object_or_404(UserProfile, pk=request.user.pk)
-        print(user)
     else:
-        print('no')
-
+        pass
     if request.method == 'POST':
         if form.is_valid():
             cleaned_data = form.cleaned_data

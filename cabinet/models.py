@@ -39,9 +39,6 @@ class Subscription(models.Model):
     subscribed_to = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='subscriptions_received',
                                       verbose_name='Подписан на')
 
-    def __str__(self):
-        return f'{self.subscriber} подписан на {self.subscribed_to}'
-
 
 class Posts(models.Model):
     sender = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='sent_posts',
