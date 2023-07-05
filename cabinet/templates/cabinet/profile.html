@@ -108,36 +108,15 @@
             <div>
                 <h5 class="text-muted">Подписки</h5>
             </div>
-            <div style="margin-top: 25px;color: rgb(181,181,181);"><img class="d-inline-block"
-                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
-                                                                        style="border-radius: 30px;" width="40">
-                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-            </div>
-            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
-                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
-                                                                        style="border-radius: 30px;" width="40">
-                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-            </div>
-            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
-                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
-                                                                        style="border-radius: 30px;" width="40">
-                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-            </div>
-            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
-                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
-                                                                        style="border-radius: 30px;" width="40">
-                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-            </div>
-            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
-                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
-                                                                        style="border-radius: 30px;" width="40">
-                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-            </div>
-            <div style="margin-top: 15px;color: rgb(181,181,181);"><img class="d-inline-block"
-                                                                        src="{% static 'cabinet/assets/img/4426658.jpg' %}"
-                                                                        style="border-radius: 30px;" width="40">
-                <p class="d-inline-block" style="padding-left: 10px;">serjasum</p>
-            </div>
+            {% for sub in subscription %}
+                <a href="{{ sub.subscribed_to.pk }}">
+                    <div style="margin-top: 20px;color: rgb(181,181,181);"><img class="d-inline-block"
+                                                                                src="../../media/{{ sub.subscribed_to.avatar }}"
+                                                                                style="border-radius: 30px;" width="40">
+                        <p class="d-inline-block" style="padding-left: 10px;text-decoration:none;color:grey;">{{ sub.subscribed_to.username }}</p>
+                    </div>
+                </a>
+            {% endfor %}
         </div>
         <div class="col-md-6 col-xxl-8 offset-xxl-1 text-light"
              style="height: 100%;background: #1f1f1f;border-radius: 25px;">
