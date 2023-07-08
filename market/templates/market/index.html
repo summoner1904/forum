@@ -12,185 +12,315 @@
 </head>
 
 <body class="bg-dark">
-    <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span class="fs-5 fw-bold">ITPONIC</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
-                </ul>
-                <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a href = '{% url 'account_login' %}' class="btn btn-primary" type="button">Войти</a></div>
-            </div>
-            {% if user.is_authenticated %}
-                <div class="d-none d-md-block">
-                    <a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a>
-                    <a href="{% url 'account_logout' %}" class="btn btn-danger me-2" type="button">Выйти</a>
-                </div>
-            {% else %}
-            <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a class="btn btn-primary" role="button" href="{% url 'account_login' %}">Войти</a></div>
-            {% endif %}
+<nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span
+            class="fs-5 fw-bold">ITPONIC</span></a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
+            </ul>
+            <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2" type="button">Зарегистрироваться</a><a
+                    href='{% url 'account_login' %}' class="btn btn-primary" type="button">Войти</a></div>
         </div>
-    </nav>
-    <div class="container" style="margin-top: 75px;">
-        <div class="row">
-            <div class="col-md-6 col-xxl-3 offset-xxl-0" style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;"><button class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">Создать тему</button>
-                <h5 class="text-light">Основное</h5>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Торговля</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Работа и услуги</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Арбитражи</a>
-                <h5 class="text-light">Тематическое</h5>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Статьи</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">ChatGPT</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Софт</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Тематические вопросы</a>
-                <h5 class="text-light">Общий раздел</h5>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Компьютеры</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Телефоны</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Программирование</a>
-                <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Веб-разработка</a>
+        {% if user.is_authenticated %}
+            <div class="d-none d-md-block">
+                <a href="{% url 'cabinet:profile' user.pk %}" class="btn btn-light me-2" type="button">Профиль</a>
+                <a href="{% url 'account_logout' %}" class="btn btn-danger me-2" type="button">Выйти</a>
             </div>
-            <div class="col-md-6 col-xxl-8 offset-xxl-1 pulse animated" style="background: #1f1f1f;padding: 30px;border-radius: 20px;padding-left: 50px;">
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+        {% else %}
+            <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
+                                              type="button">Зарегистрироваться</a><a class="btn btn-primary"
+                                                                                     role="button"
+                                                                                     href="{% url 'account_login' %}">Войти</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+{% if messages %}
+    {% for message in messages %}
+        <div class="{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<style>
+    .success {
+        background: rgb(25, 134, 83);
+        color: white;
+        border-radius: 10px;
+        padding-left: 20px;
+        height: 50px;
+        display: flex;
+        position: fixed;
+        margin-bottom: 20px;
+        align-items: center;
+        text-align: center;
+        width: 200px;
+        padding-right: 20px;
+        top: 80px;
+        right: 20px;
+    }
+
+    .error {
+        background: rgb(220, 53, 69);
+        color: white;
+        border-radius: 10px;
+        padding-left: 20px;
+        height: 50px;
+        display: flex;
+        position: fixed;
+        margin-bottom: 20px;
+        align-items: center;
+        text-align: center;
+        width: 200px;
+        padding-right: 20px;
+        top: 80px;
+        right: 20px;
+    }
+</style>
+<div class="container" style="margin-top: 75px;">
+    <div class="row">
+        <div class="col-md-6 col-xxl-3 offset-xxl-0"
+             style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;">
+            <button class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">Создать тему</button>
+            <h5 class="text-light">Основное</h5>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Торговля</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Работа
+                и услуги</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Арбитражи</a>
+            <h5 class="text-light">Тематическое</h5>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Статьи</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">ChatGPT</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Софт</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Тематические
+                вопросы</a>
+            <h5 class="text-light">Общий раздел</h5>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Компьютеры</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Телефоны</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Программирование</a>
+            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Веб-разработка</a>
+        </div>
+        <div class="col-md-6 col-xxl-8 offset-xxl-1 pulse animated"
+             style="background: #1f1f1f;padding: 30px;border-radius: 20px;padding-left: 50px;">
+            <div class="row" style="margin-top: 20px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;overflow: clip;"><strong><a href="#"
+                                                                                           style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col" style="margin-top: 0;">
-                        <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#" style="color: rgb(214, 214, 214);text-decoration:none;">Фастик с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30" height="30" src="{% static 'market/assets/img/4426658.jpg' %}" style="border-radius: 30px;">
-                        <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
-                        <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
-                    </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col" style="margin-top: 0;">
+                    <h5 class="text-light" style="height: 25px;width: 85%;overflow: clip;"><strong><a href="#"
+                                                                                                      style="color: rgb(214, 214, 214);text-decoration:none;">Фастик
+                        с бонусом за трудоустройство в Яндекс.Еду и Бургер Кинг</a></strong><br><br></h5><img width="30"
+                                                                                                              height="30"
+                                                                                                              src="{% static 'market/assets/img/4426658.jpg' %}"
+                                                                                                              style="border-radius: 30px;">
+                    <a href="#" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">serjasum</a>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">15 минут назад</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">7 репутаций</p>
+                    <p class="text-muted d-inline-block" style="margin-left: 20px;">4 ответа</p>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{% static 'market/assets/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'market/assets/js/bs-init.js' %}"></script>
+</div>
+<script src="{% static 'market/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'market/assets/js/bs-init.js' %}"></script>
 </body>
 
 </html>
