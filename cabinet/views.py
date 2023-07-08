@@ -8,26 +8,22 @@ from django.contrib import messages
 
 def profile(request, pk):
     user = get_object_or_404(UserProfile, pk=pk)
-    post_form = PostProfileForm(request.POST)
-    subscribed = False
-    if post_form.is_valid():
-        data = post_form.cleaned_data
-        poster = UserProfile.objects.get(pk=pk)
-        Posts.objects.create(sender=request.user, poster=poster, text_post=data['text_post'])
-    posts = Posts.objects.filter(poster_id=pk)
-    subscription = Subscription.objects.filter(subscriber_id=pk)
-
+    form = PostProfileForm(request.POST)
+    posts = Posts.objects.filter(poster_id=pk).order_by('-pk')
+    subscribes = Subscription.objects.filter(subscriber_id=pk)
     if request.method == 'POST':
-        # Проверка на то - есть ли подписка этого пользователя на этого юзера.
-        if not Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
-            Subscription.objects.create(subscriber=request.user, subscribed_to=user)
-            subscribed = True
-            return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed, 'post_form': post_form, 'posts': posts})
-        else:
+        if form.is_valid():
+            data = form.cleaned_data
+            Posts.objects.create(sender=request.user, poster=user, text_post=data['text_post'])
+            form = PostProfileForm()
+        elif Subscription.objects.filter(subscriber=request.user, subscribed_to=user):
             sub = Subscription.objects.filter(subscriber=request.user, subscribed_to=user)
             sub.delete()
-            subscribed = False
-    return render(request, 'cabinet/userprofile.html', {'user': user, 'subscribed': subscribed, 'post_form': post_form, 'posts': posts, 'subscription': subscription})
+        else:
+            Subscription.objects.create(subscriber=request.user, subscribed_to=user)
+    subscribe = Subscription.objects.filter(subscriber=request.user, subscribed_to=user)
+    return render(request, 'cabinet/profile.html', {'user': user, 'form': form, 'posts': posts,
+                                                    'subscribes': subscribes, 'subscribe': subscribe})
 
 
 @login_required
