@@ -1,14 +1,14 @@
 from .crystalpay import CrystalPAY, InvoiceType
 
 shop = 'summoner16'
-token = '8b1d1496fb36ef7fec191a3d2bbb88d08765eea8'
-salt = 'af6bef649e29474ae48fddc6638b5efe4dfcac89'
+token = 'd7e5c81b9f0ac706ef13a2614227f45771f0f49e'
+salt = 'c37d19746f7597f9c13862c111fb32d4df3cd75f'
 
 payment = CrystalPAY(shop, token, salt)
 
 
 def create_bill(amount):
-    bill = payment.Invoice.create(amount=amount, type_=InvoiceType.purchase, lifetime=15)
+    bill = payment.Invoice.create(amount=amount, type_=InvoiceType.purchase, lifetime=60*24)
     return bill
 
 
