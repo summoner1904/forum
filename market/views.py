@@ -2,9 +2,11 @@ import requests
 from requests.exceptions import MissingSchema, ConnectionError
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+
+from cabinet.payment import check_state
 from .forms import MarketFilterForm, SellAccountForm
 from .models import Product
-from cabinet.models import UserProfile
+from cabinet.models import UserProfile, Bill
 
 
 def index(request):
@@ -12,13 +14,24 @@ def index(request):
 
 
 def market(request):
+    bill = Bill.objects.filter(user=request.user)
+    for i in bill:
+        if check_state(i.bill_id):
+            request.user.access = True
+            UserProfile.save(request.user)
     form = MarketFilterForm(request.POST)
     sell = SellAccountForm(request.POST)
     items = list(Product.objects.all())
+    if request.user.access == False:
+        messages.error(request, 'У Вас нет доступа к маркету. Его можно приобрести в настройках профиля.')
+        return render(request, 'market/market.html', {'form': form, 'sell': sell, 'items': items})
+    else:
+        messages.success(request, 'Ограничений нет.')
     if request.method == 'POST':
         if sell.is_valid():
             data = sell.cleaned_data
             lst = list(Product.objects.all())
+            # Проверка на корректность URL адреса
             try:
                 r = requests.get(url=data['link'])
             except (ConnectionError, MissingSchema):
