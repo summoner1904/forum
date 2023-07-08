@@ -49,3 +49,10 @@ class Posts(models.Model):
     text_post = models.CharField(max_length=6144, verbose_name='Текст поста')
     created_at = models.DateTimeField(verbose_name='Время создания', auto_now=True)
 
+
+class Bill(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='Пользователь')
+    bill_id = models.CharField(max_length=128, verbose_name='ID Платежа')
+    state = models.BooleanField(verbose_name='Статус', default=False)
+
+

@@ -1,8 +1,8 @@
+from .payment import create_bill, check_state
 from django.shortcuts import render, get_object_or_404
-from .models import UserProfile, Subscription, Posts
+from .models import UserProfile, Subscription, Posts, Bill
 from django.contrib.auth.decorators import login_required
 from .forms import SettingsProfileForm, PostProfileForm
-from .payment import create_bill, check_state
 from django.contrib import messages
 
 
@@ -28,12 +28,12 @@ def profile(request, pk):
 
 @login_required
 def settings_profile(request):
-    bill = create_bill(100)
     form = SettingsProfileForm(request.POST, request.FILES)
-    if check_state(bill['id']):
-        user = get_object_or_404(UserProfile, pk=request.user.pk)
-    else:
-        pass
+    if not Bill.objects.filter(user=request.user):
+        bill = create_bill(100)
+        Bill.objects.create(bill_id=bill['id'], user=request.user)
+    bill = Bill.objects.filter(user=request.user).values_list('bill_id', flat=True)
+    url = 'https://pay.crystalpay.io/?i=' + bill[0]
     if request.method == 'POST':
         if form.is_valid():
             cleaned_data = form.cleaned_data
@@ -44,5 +44,5 @@ def settings_profile(request):
             messages.success(request, 'Данные профиля успешно обновлены.')
         else:
             messages.error(request, 'Произошла ошибка при обновлении даных профиля.')
-    return render(request, 'cabinet/settings.html', {'form': form, 'url_payment': bill['url']})
+    return render(request, 'cabinet/settings.html', {'form': form, 'url': url})
 
