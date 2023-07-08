@@ -49,7 +49,7 @@
         <div class="col-md-6 col-xxl-3 offset-xxl-0"
              style="background: #1f1f1f;border-radius: 25px;padding-top: 15px;margin-bottom: 20px;text-align: center">
             <div>
-                <img src="{% block image_profile %}{% endblock %}" style="width: 300px;padding: 15px;height: 300px;">
+                <img src="../../media/{{ user.avatar }}" style="width: 300px;padding: 15px;height: 300px;">
             </div>
             {% if request.user == user %}
                 <a href="{% url 'cabinet:settings' %}">
@@ -61,7 +61,7 @@
             {% else %}
                 <form action="{% url 'cabinet:profile' pk=user.pk %}" method="post">
                     {% csrf_token %}
-                    {% if not subscribed %}
+                    {% if not subscribe %}
                         <button name='subscribed'
                                 class="btn btn-danger text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
                                 type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
@@ -71,7 +71,7 @@
                 </form>
                 <form action="{% url 'cabinet:profile' pk=user.pk %}" method="post">
                     {% csrf_token %}
-                    {% if subscribed %}
+                    {% if subscribe %}
                         <button name='subscribed'
                                 class="btn btn-dark text-center d-block d-xxl-flex mx-auto justify-content-xxl-center"
                                 type="submit" style="width: 80%;margin-top: 7%;border-style: none;margin-bottom: 20px;">
@@ -86,18 +86,18 @@
              style="padding: 20px;background: #1f1f1f;border-radius: 25px;height: 100%;">
             <div>
                 <div style="padding-left: 15px;">
-                    <h5 class="d-inline-block">{% block username %}{% endblock %}</h5>
-                    <p class="text-muted d-inline-block float-end">{% block last-online %}{% endblock %}</p>
-                    <p class="text-muted">{% block status %}{% endblock %}</p>
+                    <h5 class="d-inline-block">{{user.username}}</h5>
+                    <p class="text-muted d-inline-block float-end">{{user.last_login | naturaltime}}</p>
+                    <p class="text-muted">{{ user.status }}</p>
                 </div>
             </div>
             <hr>
-            <p><span class="text-muted">Дата регистрации:&nbsp;</span>{% block date_joined %}{% endblock %}</p>
-            <p><span class="text-muted">Пол:&nbsp;</span>{% block gender %}{% endblock %}</p>
-            <p><span class="text-muted">Discord:&nbsp;</span>{% block discord %}{% endblock %}</p>
-            <p><span class="text-muted">Telegram:&nbsp;</span>{% block telegram %}{% endblock %}</p>
-            <p><span class="text-muted">Steam:&nbsp;</span>{% block steam %}{% endblock %}</p>
-            <p><span class="text-muted">Дата рождения:&nbsp;</span>{% block date_birthday %}{% endblock %}</p>
+            <p><span class="text-muted">Дата регистрации:&nbsp;</span>{{ user.date_joined }}</p>
+            <p><span class="text-muted">Пол:&nbsp;</span>{{ user.gender }}</p>
+            <p><span class="text-muted">Discord:&nbsp;</span>{{ user.discord }}</p>
+            <p><span class="text-muted">Telegram:&nbsp;</span>{{ user.telegram }}</p>
+            <p><span class="text-muted">Steam:&nbsp;</span>{{ user.steam }}</p>
+            <p><span class="text-muted">Дата рождения:&nbsp;</span>{{ user.date_birthday }}</p>
         </div>
     </div>
 </div>
@@ -108,7 +108,7 @@
             <div>
                 <h5 class="text-muted">Подписки</h5>
             </div>
-            {% for sub in subscription %}
+            {% for sub in subscribes %}
                 <a href="{{ sub.subscribed_to.pk }}">
                     <div style="margin-top: 20px;color: rgb(181,181,181);"><img class="d-inline-block"
                                                                                 src="../../media/{{ sub.subscribed_to.avatar }}"
@@ -122,23 +122,23 @@
              style="height: 100%;background: #1f1f1f;border-radius: 25px;">
             <div class="text-center" style="height: 100%;padding-top: 20px;">
                 <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                    <p style="margin-bottom: 5px;">{% block reputation %}{% endblock %}</p>
+                    <p style="margin-bottom: 5px;">{{ user.reputation }}</p>
                     <p class="text-muted">Репутация</p>
                 </div>
                 <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                    <p style="margin-bottom: 5px;">{% block messages %}{% endblock %}</p>
+                    <p style="margin-bottom: 5px;">{{ user.messages }}</p>
                     <p class="text-muted">Сообщений</p>
                 </div>
                 <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                    <p style="margin-bottom: 5px;">{% block subscribes %}{% endblock %}</p>
+                    <p style="margin-bottom: 5px;">{{ user.subscribes }}</p>
                     <p class="text-muted">Подписчиков</p>
                 </div>
                 <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                    <p style="margin-bottom: 5px;">{% block products %}{% endblock %}</p>
+                    <p style="margin-bottom: 5px;">{{ user.product }}</p>
                     <p class="text-muted">Товаров</p>
                 </div>
                 <div class="text-center d-inline-block" style="width: 100px;margin: 30px;">
-                    <p style="margin-bottom: 5px;">{% block registration %}{% endblock %}</p>
+                    <p style="margin-bottom: 5px;">{% if user.reputation < 5 %}Новичок{% elif user.reputation < 21%}Опытный{% elif user.reputation > 20 %}Легенда{% endif %}</p>
                     <p class="text-muted">На сайте</p>
                 </div>
             </div>
@@ -146,8 +146,8 @@
             <form action="{% url 'cabinet:profile' user.pk %}" method="post">
                 {% csrf_token %}
                 <div style="padding: 30px;margin-bottom: 9px;width: 100%;"><img class="d-inline-block" src="
-                    {% block image_profile1 %}{% endblock %}" style="border-radius: 30px;" width="55" height="55">
-                    {{ post_form.text_post }}
+                    ../../media/{{ user.avatar }}" style="border-radius: 30px;" width="55" height="55">
+                    {{ form.text_post }}
                     <button class="btn btn-success btn-sm d-block float-none" type="submit"
                             style="height: 40px;margin-top: 10px;margin-left: 70px;">Опубликовать
                     </button>
