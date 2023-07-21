@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="color: rgb(255,255,255);">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Новая тема</title>
+    <link rel="stylesheet"
+          href="{% static 'threads/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'threads/assets/css/styles.css' %}">
+</head>
+
+<body class="bg-dark">
+<nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
+    <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span
+            class="fs-5 fw-bold">ITPONIC</span></a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
+            </ul>
+            {% if user.is_authenticated %}
+                <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' request.user.pk %}"
+                                               class="btn btn-light me-2" type="button">Профиль</a><a
+                        href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                </div>
+                <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' request.user.pk %}"
+                                                  class="btn btn-light me-2" type="button">Профиль</a><a
+                        href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+            {% else %}
+                <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
+                                               type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}"
+                                                                                      class="btn btn-primary"
+                                                                                      type="button">Войти</a></div>
+                </div>
+                <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
+                                                  type="button">Зарегистрироваться</a><a class="btn btn-primary"
+                                                                                         role="button"
+                                                                                         href="{% url 'account_login' %}">Войти</a>
+                </div>
+            {% endif %}
+</nav>
+<div class="text-light" style="margin-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col"
+                 style="background: #1f1f1f;border-radius: 10px;padding: 20px;padding-left: 30px;">
+                <form action=""
+                      method="post">
+                    {% csrf_token %}
+                    <h4>Заголовок:</h4>
+                    <p class="text-muted">Кратко расскажите о своей теме.
+                        Учтите, что люди обращают на это большое внимание.</p>
+                    {{ form.title }}
+                    <h4 style="margin-top: 20px;">Основной текст:</h4>
+                    <p class="text-muted">Уточните все необходимые детали по
+                        необходимости. Помните, что иногда лучше приложить
+                        медиа-файлы, чем писать огромные сообщения.</p>
+                    {{ form.text }}
+                    <h4 style="margin-top: 20px;">Медиа:</h4>
+                    <p class="text-muted">Приложите изображения по
+                        необходимости.</p>
+                    {{ form.screen }}
+                    <button class="btn btn-danger d-block" type="submit"
+                            style="margin-top: 30px;width: 80%;margin-bottom: 20px;">
+                        Создать тему
+                    </button>
+                </form>
+            </div>
+            <style>
+                input:focus, textarea:focus {
+                    outline: #5b5b5b 1px solid;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+<script src="{% static 'threads/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>
