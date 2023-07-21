@@ -9,3 +9,4 @@ class Thread(models.Model):
     screen = models.ImageField(verbose_name='Медиа', upload_to='images_threads/%Y-%m-%d', null=True, default=None)
     likes = models.IntegerField(verbose_name='Лайков', default=0)
     comments = models.IntegerField(verbose_name='Ответов', default=0)
+    created_at = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
