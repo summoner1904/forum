@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('market.urls', namespace='market')),
     path('accounts/', include('allauth.urls')),
     path('cabinet/', include('cabinet.urls', namespace='cabinet')),
+    path('threads/', include('threads.urls', namespace='threads'))
     path('messenger/', include('messenger.urls', namespace='messenger'))
 ]
 

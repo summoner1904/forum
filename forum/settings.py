@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Созданные приложения
     'market.apps.MarketConfig',
     'cabinet.apps.CabinetConfig',
+    'threads.apps.ThreadsConfig',
     'messenger.apps.MessengerConfig',
 ]
 
