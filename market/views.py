@@ -1,8 +1,8 @@
 import requests
 from requests.exceptions import MissingSchema, ConnectionError
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
-
+from django.shortcuts import render, get_object_or_404
+from threads.models import Thread
 from cabinet.payment import check_state
 from .forms import MarketFilterForm, SellAccountForm
 from .models import Product
@@ -10,7 +10,8 @@ from cabinet.models import UserProfile, Bill
 
 
 def index(request):
-    return render(request, 'market/index.html')
+    threads = Thread.objects.all()
+    return render(request, 'market/index.html', {'threads': threads})
 
 
 def market(request):
