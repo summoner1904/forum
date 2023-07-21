@@ -23,7 +23,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('market.urls', namespace='market')),
     path('accounts/', include('allauth.urls')),
-    path('cabinet/', include('cabinet.urls', namespace='cabinet'))
+    path('cabinet/', include('cabinet.urls', namespace='cabinet')),
+    path('threads/', include('threads.urls', namespace='threads'))
 ]
 
 if settings.DEBUG:
