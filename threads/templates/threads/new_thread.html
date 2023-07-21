@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col"
                  style="background: #1f1f1f;border-radius: 10px;padding: 20px;padding-left: 30px;">
-                <form action=""
+                <form action="{% url 'threads:new_thread' %}"
                       method="post">
                     {% csrf_token %}
                     <h4>Заголовок:</h4>
