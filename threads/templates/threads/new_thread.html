@@ -13,35 +13,54 @@
 </head>
 
 <body class="bg-dark">
-<nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" style="background: #1f1f1f;">
-    <div class="container"><a class="navbar-brand d-flex align-items-center" href="{% url 'market:index' %}"><span
+<nav class="navbar navbar-dark navbar-expand-md sticky-top py-3"
+     style="background: #1f1f1f;">
+    <div class="container"><a class="navbar-brand d-flex align-items-center"
+                              href="{% url 'market:index' %}"><span
             class="fs-5 fw-bold">ITPONIC</span></a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-4"><span
-                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-4">
+        <button data-bs-toggle="collapse" class="navbar-toggler"
+                data-bs-target="#navcol-4"><span
+                class="visually-hidden">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse flex-grow-0 order-md-first"
+             id="navcol-4">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link active" href="{% url 'market:index' %}">Главная</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'market:market' %}">Маркет</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Сообщество</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                        href="{% url 'market:index' %}">Главная</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="{% url 'market:market' %}">Маркет</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Сообщество</a>
+                </li>
             </ul>
             {% if user.is_authenticated %}
-                <div class="d-md-none my-2"><a href="{% url 'cabinet:profile' request.user.pk %}"
-                                               class="btn btn-light me-2" type="button">Профиль</a><a
-                        href="{% url 'account_logout' %}" class="btn btn-danger" type="button">Выйти</a></div>
+                <div class="d-md-none my-2"><a
+                        href="{% url 'cabinet:profile' request.user.pk %}"
+                        class="btn btn-light me-2" type="button">Профиль</a><a
+                        href="{% url 'account_logout' %}" class="btn btn-danger"
+                        type="button">Выйти</a></div>
                 </div>
-                <div class="d-none d-md-block"><a href="{% url 'cabinet:profile' request.user.pk %}"
-                                                  class="btn btn-light me-2" type="button">Профиль</a><a
-                        href="{% url 'account_logout' %}" class="btn btn-danger" role="button">Выйти</a></div>
+                <div class="d-none d-md-block"><a
+                        href="{% url 'cabinet:profile' request.user.pk %}"
+                        class="btn btn-light me-2" type="button">Профиль</a><a
+                        href="{% url 'account_logout' %}" class="btn btn-danger"
+                        role="button">Выйти</a></div>
             {% else %}
-                <div class="d-md-none my-2"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
-                                               type="button">Зарегистрироваться</a><a href="{% url 'account_login' %}"
-                                                                                      class="btn btn-primary"
-                                                                                      type="button">Войти</a></div>
+                <div class="d-md-none my-2"><a href="{% url 'account_signup' %}"
+                                               class="btn btn-light me-2"
+                                               type="button">Зарегистрироваться</a><a
+                        href="{% url 'account_login' %}"
+                        class="btn btn-primary"
+                        type="button">Войти</a></div>
                 </div>
-                <div class="d-none d-md-block"><a href="{% url 'account_signup' %}" class="btn btn-light me-2"
-                                                  type="button">Зарегистрироваться</a><a class="btn btn-primary"
-                                                                                         role="button"
-                                                                                         href="{% url 'account_login' %}">Войти</a>
+                <div class="d-none d-md-block"><a
+                        href="{% url 'account_signup' %}"
+                        class="btn btn-light me-2"
+                        type="button">Зарегистрироваться</a><a
+                        class="btn btn-primary"
+                        role="button"
+                        href="{% url 'account_login' %}">Войти</a>
                 </div>
             {% endif %}
 </nav>
@@ -50,9 +69,10 @@
         <div class="row">
             <div class="col"
                  style="background: #1f1f1f;border-radius: 10px;padding: 20px;padding-left: 30px;">
-                <form action="{% url 'threads:new_thread' %}"
-                      method="post">
+                <form action="{% url 'threads:new_thread' %}" method="post"
+                      enctype="multipart/form-data">
                     {% csrf_token %}
+                    <!-- Ваш код формы -->
                     <h4>Заголовок:</h4>
                     <p class="text-muted">Кратко расскажите о своей теме.
                         Учтите, что люди обращают на это большое внимание.</p>
@@ -66,11 +86,49 @@
                     <p class="text-muted">Приложите изображения по
                         необходимости.</p>
                     {{ form.screen }}
+
+                    <!-- Элемент для предпросмотра изображения -->
+                    <div id="preview" style="margin-top: 20px;"></div>
+
                     <button class="btn btn-danger d-block" type="submit"
                             style="margin-top: 30px;width: 80%;margin-bottom: 20px;">
                         Создать тему
                     </button>
                 </form>
+
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const screenshotInput = document.getElementById('{{ form.screen.auto_id }}');
+                        const previewDiv = document.getElementById('preview');
+
+                        screenshotInput.addEventListener('paste', function (e) {
+                            const items = e.clipboardData.items;
+
+                            for (let i = 0; i < items.length; i++) {
+                                const item = items[i];
+                                if (item.type.indexOf('image') !== -1) {
+                                    const blob = item.getAsFile();
+                                    const file = new File([blob], 'screenshot.png', {type: 'image/png'});
+                                    const fileList = new DataTransfer();
+                                    fileList.items.add(file);
+
+                                    screenshotInput.files = fileList.files;
+
+                                    // Создаем объект URL для предпросмотра изображения
+                                    const imageURL = URL.createObjectURL(file);
+                                    // Отображаем превью изображения
+                                    const img = document.createElement('img');
+                                    img.src = imageURL;
+                                    img.style.maxWidth = '600px'; // Можете задать другие стили для изображения
+                                    previewDiv.innerHTML = ''; // Очищаем предыдущее превью (если было)
+                                    previewDiv.appendChild(img);
+                                }
+                            }
+                        });
+                    });
+                </script>
+
             </div>
             <style>
                 input:focus, textarea:focus {

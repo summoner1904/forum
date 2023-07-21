@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>item</title>
+    <title>{{ thread.title }}</title>
     <link rel="stylesheet"
           href="{% static 'threads/assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet"
@@ -104,6 +104,10 @@
                 <div>
                     <p style="margin-top: 16px;text-align: justify;padding-right: 20px;color: rgb(155,155,155);">
                         {{ thread.text }}</p>
+                    <div class="screen" style="text-align:center;">
+                        <img src="../../media/{{ thread.screen }}" style="text-align: center;" alt="">
+                    </div>
+
                 </div>
                 <hr style="margin-top: 30px;">
             </div>
@@ -241,7 +245,7 @@
                         }
 
                         .send-button-cls{
-                            height: 60px;
+                            height: 50px;
                             background: rgb(25,135,84);
                             color: white;
                             border: none;
@@ -255,7 +259,7 @@
                         .reply-input-cls{
                             color: white;
                             width: 100%;
-                            height: 60px;
+                            height: 50px;
                             border: none;
                             padding-left: 20px;
                             background-color: #2f2f2f;
