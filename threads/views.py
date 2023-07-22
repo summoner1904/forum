@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from cabinet.models import UserProfile
 from .forms import NewThreadForm
 from .models import Thread
 
@@ -10,6 +11,8 @@ def create_thread(request):
         if form.is_valid():
             data = form.cleaned_data
             thread_post = Thread.objects.create(user_id=request.user.pk, **data)
+            request.user.messages += 1  # Обновление статистики в профиле
+            UserProfile.save(request.user)
             return redirect(reverse('threads:thread', kwargs={'thread_id': thread_post.pk}))
     return render(request, 'threads/new_thread.html', {'form': form})
 
