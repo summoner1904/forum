@@ -12,7 +12,7 @@ class Product(models.Model):
     nickname = models.CharField(max_length=128, verbose_name='Никнейм')
     lvl = models.IntegerField(verbose_name='Уровень', default=0, null=True)
     country = models.CharField(max_length=64, verbose_name='Страна')
-    last_activity = models.DateField(verbose_name='Последняя активность', default=datetime.datetime.now())
+    last_activity = models.DateField(verbose_name='Последняя активность', auto_now_add=True)
     skins = models.IntegerField(verbose_name='Скины', default=0, null=True)
 
     class Meta:
