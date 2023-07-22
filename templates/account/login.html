@@ -66,9 +66,6 @@
                         </div>
                         <form class="login" method="POST" action="{% url 'account_login' %}">
                             {% csrf_token %}
-                            {% if form.errors %}
-                                {{ form.errors }}
-                            {% endif %}
                             <div class="mb-3"><input class="form-control" type="username" name="login"
                                                      placeholder="Логин"></div>
                             <div class="mb-3"><input class="form-control" type="password" name="password"
