@@ -136,7 +136,11 @@
                                 width="50" style="border-radius: 30px;">
                             <p class="d-inline-block"
                                style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">
-                                {{ comment.sender.username }}</p>
+                                {{ comment.sender.username }}
+                            {% if comment.sender == thread.user %}
+                                <span class="text-danger" style="margin-left: 20px;">Автор темы</span>
+                            {% endif %}
+                            </p>
                             <p class="text-muted d-inline-block float-end">
                                 {{ comment.created_at | naturaltime }}</p>
                             <p class="text-start">{{ comment.comment }}</p>
