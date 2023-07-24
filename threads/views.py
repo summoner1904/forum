@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from cabinet.models import UserProfile
 from .forms import NewThreadForm
-from .models import Thread
+from .models import Thread, Category
 
 @login_required
 def create_thread(request):
@@ -20,3 +20,9 @@ def create_thread(request):
 def thread(request, thread_id):
     thread_post = get_object_or_404(Thread, pk=thread_id)
     return render(request, 'threads/thread.html', {'thread': thread_post})
+
+
+def category_threads(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    threads = Thread.objects.filter(category=category)
+    return render(request, 'threads/category_thread.html', {'threads': threads})
