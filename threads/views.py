@@ -24,6 +24,8 @@ def thread(request, thread_id):
     comments = Comment.objects.filter(thread_id=thread_id)
     if request.method == 'POST':
         if form.is_valid():
+            request.user.messages += 1
+            UserProfile.save(request.user)
             Comment.objects.create(sender=request.user, thread=thread_post, comment=form.cleaned_data['comment'])
             form = NewCommentForm()
     return render(request, 'threads/thread.html', {'thread': thread_post, 'form': form, 'comments': comments})
