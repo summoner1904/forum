@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from cabinet.models import UserProfile
-from .forms import NewThreadForm
-from .models import Thread, Category
+from .forms import NewThreadForm, NewCommentForm
+from .models import Thread, Category, Comment
+
 
 @login_required
 def create_thread(request):
@@ -19,7 +20,13 @@ def create_thread(request):
 
 def thread(request, thread_id):
     thread_post = get_object_or_404(Thread, pk=thread_id)
-    return render(request, 'threads/thread.html', {'thread': thread_post})
+    form = NewCommentForm(request.POST)
+    comments = Comment.objects.filter(thread_id=thread_id)
+    if request.method == 'POST':
+        if form.is_valid():
+            Comment.objects.create(sender=request.user, thread=thread_post, comment=form.cleaned_data['comment'])
+            form = NewCommentForm()
+    return render(request, 'threads/thread.html', {'thread': thread_post, 'form': form, 'comments': comments})
 
 
 def category_threads(request, category_id):

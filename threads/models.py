@@ -21,3 +21,10 @@ class Thread(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    sender = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=10000, verbose_name='Ответ')
+    created_at = models.DateTimeField(auto_now_add=True)
