@@ -46,4 +46,4 @@ def thread(request, thread_id):
 def category_threads(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
     threads = Thread.objects.filter(category=category)
-    return render(request, "threads/category_thread.html", {"threads": threads})
+    return render(request, 'threads/category_thread.html', {'threads': threads, 'category': category})
