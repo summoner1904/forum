@@ -14,12 +14,11 @@ class PayoffSubtractFrom:
 
 
 class crystal_utils:
-    ''' Дополнительный класс, содержащий в себе дополнительные функции для работы SDK '''
+    """Дополнительный класс, содержащий в себе дополнительные функции для работы SDK"""
 
-    ''' Соединяет необязательные параметры с обязательными '''
+    """ Соединяет необязательные параметры с обязательными """
 
     def concatParams(self, concatList, kwargs):
-
         temp = concatList
 
         for key, param in kwargs:
@@ -27,22 +26,21 @@ class crystal_utils:
 
         return temp
 
-    ''' Отправка запроса на API '''
+    """ Отправка запроса на API """
 
     def requestsApi(self, method, function, params):
-
         response = json.loads(
             requests.post(
                 f"https://api.crystalpay.io/v2/{method}/{function}/",
                 data=params,
-                headers={'Content-Type': 'application/json'}
+                headers={"Content-Type": "application/json"},
             ).text
         )
 
-        if (response["error"]):
-            raise Exception(response['errors'])
+        if response["error"]:
+            raise Exception(response["errors"])
 
-        ''' Убираем из JSON ответа сообщения об ошибках '''
+        """ Убираем из JSON ответа сообщения об ошибках """
 
         del response["error"]
         del response["errors"]
@@ -51,10 +49,10 @@ class crystal_utils:
 
 
 class CrystalPAY:
-    ''' Гланый класс для работы с CrystalApi '''
+    """Гланый класс для работы с CrystalApi"""
 
     def __init__(self, auth_login, auth_secret, salt):
-        ''' Создание подклассов '''
+        """Создание подклассов"""
 
         self.Me = self.Me(auth_login, auth_secret, crystal_utils())
         self.Method = self.Method(auth_login, auth_secret, crystal_utils())
@@ -64,109 +62,109 @@ class CrystalPAY:
         self.Ticker = self.Ticker(auth_login, auth_secret, crystal_utils())
 
     class Me:
-
         def __init__(self, auth_login, auth_secret, crystal_utils):
             self.__auth_login = auth_login
             self.__auth_secret = auth_secret
             self.__crystal_utils = crystal_utils
 
-        ''' Получение информации о кассе '''
+        """ Получение информации о кассе """
 
         def getinfo(self):
             response = self.__crystal_utils.requestsApi(
                 "me",
                 "info",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret
-                })
+                json.dumps(
+                    {"auth_login": self.__auth_login, "auth_secret": self.__auth_secret}
+                ),
             )
 
             return response
 
     class Method:
-
         def __init__(self, auth_login, auth_secret, crystal_utils):
             self.__auth_login = auth_login
             self.__auth_secret = auth_secret
             self.__crystal_utils = crystal_utils
 
-        ''' Получение информации о методах оплаты '''
+        """ Получение информации о методах оплаты """
 
         def getlist(self):
             response = self.__crystal_utils.requestsApi(
                 "method",
                 "list",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret
-                })
+                json.dumps(
+                    {"auth_login": self.__auth_login, "auth_secret": self.__auth_secret}
+                ),
             )
 
             return response
 
-        ''' Изменение настроек метода оплаты '''
+        """ Изменение настроек метода оплаты """
 
         def edit(self, method, extra_commission_percent, enabled):
             response = self.__crystal_utils.requestsApi(
                 "method",
                 "edit",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "method": method,
-                    "extra_commission_percent": extra_commission_percent,
-                    "enabled": enabled
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "method": method,
+                        "extra_commission_percent": extra_commission_percent,
+                        "enabled": enabled,
+                    }
+                ),
             )
 
             return response
 
     class Balance:
-
         def __init__(self, auth_login, auth_secret, crystal_utils):
             self.__auth_login = auth_login
             self.__auth_secret = auth_secret
             self.__crystal_utils = crystal_utils
 
-        ''' Получение баланса кассы '''
+        """ Получение баланса кассы """
 
         def getinfo(self, hide_empty=False):
             response = self.__crystal_utils.requestsApi(
                 "balance",
                 "info",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "hide_empty": hide_empty
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "hide_empty": hide_empty,
+                    }
+                ),
             )
 
             return response["balances"]
 
     class Invoice:
-
         def __init__(self, auth_login, auth_secret, crystal_utils):
             self.__auth_login = auth_login
             self.__auth_secret = auth_secret
             self.__crystal_utils = crystal_utils
 
-        ''' Получение информации о счёте '''
+        """ Получение информации о счёте """
 
         def getinfo(self, id):
             response = self.__crystal_utils.requestsApi(
                 "invoice",
                 "info",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "id": id
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "id": id,
+                    }
+                ),
             )
 
             return response
 
-        ''' Выставление счёта на оплату '''
+        """ Выставление счёта на оплату """
 
         def create(self, amount, type_, lifetime, **kwargs):
             response = self.__crystal_utils.requestsApi(
@@ -179,24 +177,23 @@ class CrystalPAY:
                             "auth_secret": self.__auth_secret,
                             "amount": amount,
                             "type": type_,
-                            "lifetime": lifetime
+                            "lifetime": lifetime,
                         },
-                        kwargs.items()
+                        kwargs.items(),
                     )
-                )
+                ),
             )
 
             return response
 
     class Payoff:
-
         def __init__(self, auth_login, auth_secret, salt, crystal_utils):
             self.__auth_login = auth_login
             self.__auth_secret = auth_secret
             self.__salt = salt
             self.__crystal_utils = crystal_utils
 
-        ''' Создание заявки на вывод средств '''
+        """ Создание заявки на вывод средств """
 
         def create(self, amount, method, wallet, subtract_from, **kwargs):
             signature_string = f"{amount}:{method}:{wallet}:{self.__salt}"
@@ -214,16 +211,16 @@ class CrystalPAY:
                             "amount": amount,
                             "method": method,
                             "wallet": wallet,
-                            "subtract_from": subtract_from
+                            "subtract_from": subtract_from,
                         },
-                        kwargs.items()
+                        kwargs.items(),
                     )
-                )
+                ),
             )
 
             return response
 
-        ''' Подтверждение заявки на вывод средств '''
+        """ Подтверждение заявки на вывод средств """
 
         def submit(self, id):
             signature_string = f"{id}:{self.__salt}"
@@ -232,17 +229,19 @@ class CrystalPAY:
             response = self.__crystal_utils.requestsApi(
                 "payoff",
                 "submit",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "signature": signature,
-                    "id": id,
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "signature": signature,
+                        "id": id,
+                    }
+                ),
             )
 
             return response
 
-        ''' Отмена заявки на вывод средств '''
+        """ Отмена заявки на вывод средств """
 
         def cancel(self, id):
             signature_string = f"{id}:{self.__salt}"
@@ -251,63 +250,70 @@ class CrystalPAY:
             response = self.__crystal_utils.requestsApi(
                 "payoff",
                 "cancel",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "signature": signature,
-                    "id": id,
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "signature": signature,
+                        "id": id,
+                    }
+                ),
             )
 
             return response
 
-        ''' Получение информации о заявке на вывод средств '''
+        """ Получение информации о заявке на вывод средств """
 
         def getinfo(self, id):
             response = self.__crystal_utils.requestsApi(
                 "payoff",
                 "info",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "id": id,
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "id": id,
+                    }
+                ),
             )
 
             return response
 
     class Ticker:
-
         def __init__(self, auth_login, auth_secret, crystal_utils):
             self.__auth_login = auth_login
             self.__auth_secret = auth_secret
             self.__crystal_utils = crystal_utils
 
-        ''' Получение информации о заявке на вывод средств '''
+        """ Получение информации о заявке на вывод средств """
 
         def getlist(self):
             response = self.__crystal_utils.requestsApi(
                 "ticker",
                 "list",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                    }
+                ),
             )
 
             return response["tickers"]
 
-        ''' Получение курса валют по отношению к рублю '''
+        """ Получение курса валют по отношению к рублю """
 
         def get(self, tickers):
             response = self.__crystal_utils.requestsApi(
                 "ticker",
                 "get",
-                json.dumps({
-                    "auth_login": self.__auth_login,
-                    "auth_secret": self.__auth_secret,
-                    "tickers": tickers
-                })
+                json.dumps(
+                    {
+                        "auth_login": self.__auth_login,
+                        "auth_secret": self.__auth_secret,
+                        "tickers": tickers,
+                    }
+                ),
             )
 
             return response
