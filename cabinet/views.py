@@ -1,4 +1,4 @@
-from .payment import create_bill, check_state
+from .payment import create_bill
 from django.shortcuts import render, get_object_or_404
 from .models import UserProfile, Subscription, Posts, Bill
 from django.contrib.auth.decorators import login_required

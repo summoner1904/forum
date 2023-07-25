@@ -50,23 +50,23 @@
     <div class="row">
         <div class="col-md-6 col-xxl-3 offset-xxl-0"
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;">
-            <button id="openModalBtn" class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">
-                Продать товар
-            </button>
+            <a href="{% url 'threads:new_thread' %}" class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">Создать тему</a>
             <h5 class="text-light">Основное</h5>
-            <p class="text-light" style="margin-left: 20px;">Торговля</p>
-            <p class="text-light" style="margin-left: 20px;">Работа и услуги</p>
-            <p class="text-light" style="margin-left: 20px;">Арбитражи</p>
+            <a href="{% url 'threads:category' 8 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Торговля</a>
+            <a href="{% url 'threads:category' 9 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Работа
+                и услуги</a>
+            <a href="{% url 'threads:category' 10 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Арбитражи</a>
             <h5 class="text-light">Тематическое</h5>
-            <p class="text-light" style="margin-left: 20px;">Статьи</p>
-            <p class="text-light" style="margin-left: 20px;">ChatGPT</p>
-            <p class="text-light" style="margin-left: 20px;">Софт</p>
-            <p class="text-light" style="margin-left: 20px;">Тематические вопросы</p>
+            <a href="{% url 'threads:category' 11 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Статьи</a>
+            <a href="{% url 'threads:category' 12 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">ChatGPT</a>
+            <a href="{% url 'threads:category' 13 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Софт</a>
+            <a href="{% url 'threads:category' 14 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Тематические
+                вопросы</a>
             <h5 class="text-light">Общий раздел</h5>
-            <p class="text-light" style="margin-left: 20px;">Компьютеры</p>
-            <p class="text-light" style="margin-left: 20px;">Телефоны</p>
-            <p class="text-light" style="margin-left: 20px;">Программирование</p>
-            <p class="text-light" style="margin-left: 20px;">Веб-разработка</p>
+            <a href="{% url 'threads:category' 15 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Компьютеры</a>
+            <a href="{% url 'threads:category' 16 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Телефоны</a>
+            <a href="{% url 'threads:category' 17 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Программирование</a>
+            <a href="{% url 'threads:category' 18 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Веб-разработка</a>
         </div>
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
