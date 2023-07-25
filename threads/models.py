@@ -18,6 +18,7 @@ class Thread(models.Model):
     likes = models.IntegerField(verbose_name='Лайков', default=0)
     comments = models.IntegerField(verbose_name='Ответов', default=0)
     created_at = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+    views = models.IntegerField(verbose_name='Просмотров', default=0)
 
     def __str__(self):
         return self.title

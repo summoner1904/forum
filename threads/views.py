@@ -28,6 +28,8 @@ def thread(request, thread_id):
             UserProfile.save(request.user)
             Comment.objects.create(sender=request.user, thread=thread_post, comment=form.cleaned_data['comment'])
             form = NewCommentForm()
+    thread_post.views += 1  # Изменение просмотров на посте
+    Thread.save(thread_post)
     return render(request, 'threads/thread.html', {'thread': thread_post, 'form': form, 'comments': comments})
 
 
