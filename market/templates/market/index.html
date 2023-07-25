@@ -89,21 +89,21 @@
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;">
             <a href="{% url 'threads:new_thread' %}" class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">Создать тему</a>
             <h5 class="text-light">Основное</h5>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Торговля</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Работа
+            <a href="{% url 'threads:category' 8 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Торговля</a>
+            <a href="{% url 'threads:category' 9 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Работа
                 и услуги</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Арбитражи</a>
+            <a href="{% url 'threads:category' 10 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Арбитражи</a>
             <h5 class="text-light">Тематическое</h5>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Статьи</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">ChatGPT</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Софт</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Тематические
+            <a href="{% url 'threads:category' 11 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Статьи</a>
+            <a href="{% url 'threads:category' 12 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">ChatGPT</a>
+            <a href="{% url 'threads:category' 13 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Софт</a>
+            <a href="{% url 'threads:category' 14 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Тематические
                 вопросы</a>
             <h5 class="text-light">Общий раздел</h5>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Компьютеры</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Телефоны</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Программирование</a>
-            <a href="#" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Веб-разработка</a>
+            <a href="{% url 'threads:category' 15 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Компьютеры</a>
+            <a href="{% url 'threads:category' 16 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Телефоны</a>
+            <a href="{% url 'threads:category' 17 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Программирование</a>
+            <a href="{% url 'threads:category' 18 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Веб-разработка</a>
         </div>
         <div class="col-md-6 col-xxl-8 offset-xxl-1 pulse animated"
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;">
@@ -114,9 +114,8 @@
                     <a href="{% url 'cabinet:profile' thread.user.pk %}" class="text-danger d-inline-block" style="margin-left: 10px;text-decoration:none;">{{ thread.user.username }}</a>
                     <p class="text-muted d-inline-block" style="margin-left: 20px;">
                         {{ thread.created_at | naturaltime }}</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 20px;">{{ thread.likes }} репутаций</p>
-                    <p class="text-muted d-inline-block" style="margin-left: 20px;">
-                        {% if thread.comments < 2 %}{{ thread.comments }} ответов {% elif thread.comments > 2 %}{{ thread.comments }} ответов {% endif %}</p>
+                    <p class="text-primary d-inline-block" style="margin-left: 20px;">
+                        {{ thread.category }}</p>
                 </div>
             </div>
             {% endfor %}
