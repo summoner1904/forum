@@ -121,60 +121,74 @@
                     </div>
 
                 </div>
-                <hr style="margin-top: 30px;">
+                <hr>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12"
                  style="margin-top: 20px;background: #1f1f1f;border-radius: 10px;padding: 20px;padding-left: 30px;">
                 <h5>Ответы</h5>
-                {% for comment in comments %}
-                    <div style="padding: 30px;">
-                        <div style="margin-bottom: 20px;"><img
-                                class="d-inline-block"
-                                src="../../media/{{ comment.sender.avatar }}"
-                                width="50" style="border-radius: 30px;">
-                            <p class="d-inline-block"
-                               style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">
-                                {{ comment.sender.username }}
-                            {% if comment.sender == thread.user %}
-                                <span class="text-danger" style="margin-left: 20px;">Автор темы</span>
-                            {% endif %}
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div style="padding: 30px;">
+                            <div style="margin-bottom: 20px;"><img
+                                    class="d-inline-block"
+                                    src="../../media/{{ comment.sender.avatar }}"
+                                    width="50" style="border-radius: 30px;">
+                                <p class="d-inline-block"
+                                   style="margin-left: 10px;font-size: 16px;margin-bottom: 4px;">
+                                    {{ comment.sender.username }}
+                                    {% if comment.sender == thread.user %}
+                                        <span class="text-danger"
+                                              style="margin-left: 20px;">Автор темы</span>
+                                    {% endif %}
+                                </p>
+                                <p class="text-muted d-inline-block float-end">
+                                    {{ comment.created_at | naturaltime }}</p>
+                                <p class="text-start">{{ comment.comment }}</p>
+                            </div>
+                            <p class="text-muted d-inline-block"
+                               style="margin-right: 20px;">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="1em"
+                                     height="1em" fill="currentColor"
+                                     viewBox="0 0 16 16" class="bi bi-heart"
+                                     style="margin-right: 10px;">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
+                                </svg>
+                                Мне нравится!
                             </p>
-                            <p class="text-muted d-inline-block float-end">
-                                {{ comment.created_at | naturaltime }}</p>
-                            <p class="text-start">{{ comment.comment }}</p>
                         </div>
-                        <p class="text-muted d-inline-block"
-                           style="margin-right: 20px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em"
-                                 height="1em" fill="currentColor"
-                                 viewBox="0 0 16 16" class="bi bi-heart"
-                                 style="margin-right: 10px;">
-                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path>
-                            </svg>
-                            Мне нравится!
-                        </p>
-                    </div>
-                {% endfor %}
-                <form action="{% url 'threads:thread' thread.pk %}"
-                      method="post">
-                    {% csrf_token %}
-                    <div class="send-new-reply">
-                        <div class="reply" style="width: 60%;">
-                            {{ form.comment }}
-                        </div>
-                        <div class="send">
-                            <button type="submit" class='send-button-cls'>
-                                Отправить
-                            </button>
-                        </div>
-                </form>
-                <style>
-                    .send-new-reply {
-                        text-align: center;
-                    }
+                    {% endfor %}
+                {% else %}
+                    <h4 class="text-muted"
+                        style="text-align: center;margin: 50px 0;">Здесь пока
+                        пусто...</h4>
+                {% endif %}
+                <hr>
+                <button class="text-light btn btn-success" id="new-comment-btn">
+                    Прокомментировать
+                </button>
+                <script>
+                    btn = document.getElementById('new-comment-btn')
 
+                </script>
+                <div style="display: none;" class="new-commentary">
+                    <form action="{% url 'threads:thread' thread.pk %}"
+                          method="post">
+                        {% csrf_token %}
+                        <div class="send-new-reply">
+                            <div class="reply" style="width: 60%;">
+                                {{ form.comment }}
+                            </div>
+                            <div class="send">
+                                <button type="submit" class='send-button-cls'>
+                                    Отправить
+                                </button>
+                            </div>
+                    </form>
+                </div>
+                <style>
                     .send, .reply {
                         display: inline-block;
                         vertical-align: middle;
@@ -185,7 +199,7 @@
                         background: rgb(25, 135, 84);
                         color: white;
                         border: none;
-                        padding: 0 20px;
+                        padding: 0 15px;
                     }
 
                     .reply-input-cls:focus {
