@@ -86,7 +86,7 @@
 <div class="container" style="margin-top: 75px;">
     <div class="row">
         <div class="col-md-6 col-xxl-3 offset-xxl-0"
-             style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;">
+             style="background: #1f1f1f;padding: 30px;border-radius: 20px;height: 100%;margin-bottom: 20px;">
             <a href="{% url 'threads:new_thread' %}" class="btn btn-danger" type="button" style="width: 100%;margin-bottom: 30px;">Создать тему</a>
             <h5 class="text-light">Основное</h5>
             <a href="{% url 'threads:category' 8 %}" class="text-light d-block" style="margin-left: 20px;margin-bottom: 10px;text-decoration:none;">Торговля</a>
@@ -107,6 +107,13 @@
         </div>
         <div class="col-md-6 col-xxl-8 offset-xxl-1 pulse animated"
              style="background: #1f1f1f;padding: 30px;border-radius: 20px;">
+            {% if category %}
+                <h4 class="text-light"><strong>{{ category }}</strong></h4>
+                <p style="margin-bottom: 20px;text-align: justify;" class="text-muted">{{ category.description }}</p>
+            {% else %}
+                <h4 class="text-light"><strong>Главная</strong></h4>
+                <p style="margin-bottom: 20px;text-align: justify;" class="text-muted">Добро пожаловать на форум. Наш форум предоставляет возможность продажи игровых аккаунтов, однако, основная специализация - решение вопросов, связанных с IT-отраслью.<br/><br/>Пожалуйста, соблюдайте правила общения, а при создании тем выбирайте категорию корректно. Помните, что за многократные нарушения правил Вы будете заблокированы на форуме.</p>
+            {% endif %}
             {% for thread in threads %}
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col" style="margin-top: 0;background: #252525;border-radius: 10px;padding-top: 15px;">
